@@ -1,0 +1,2663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Schiedea populations</name>
+    <Style id="icon-503-009D57-labelson">
+      <IconStyle>
+        <color>ff579d00</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-4186F0-labelson">
+      <IconStyle>
+        <color>fff08641</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-795046-labelson">
+      <IconStyle>
+        <color>ff465079</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-7C3592-labelson">
+      <IconStyle>
+        <color>ff92357c</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-B29189-labelson">
+      <IconStyle>
+        <color>ff8991b2</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-B7DBAB-labelson">
+      <IconStyle>
+        <color>ffabdbb7</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-D698AD-labelson">
+      <IconStyle>
+        <color>ffad98d6</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-EE9C96-labelson">
+      <IconStyle>
+        <color>ff969cee</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-F4B400-labelson">
+      <IconStyle>
+        <color>ff00b4f4</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-F8971B-labelson">
+      <IconStyle>
+        <color>ff1b97f8</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-F9F7A6-labelson">
+      <IconStyle>
+        <color>ffa6f7f9</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-FAD199-labelson">
+      <IconStyle>
+        <color>ff99d1fa</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Style id="icon-503-FFDD5E-labelson">
+      <IconStyle>
+        <color>ff5eddff</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+    </Style>
+    <Placemark>
+      <name><![CDATA[W&S 844]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Makapu'u Beach<br>Island: O'ahu<br>Pop_Number: 844<br>Topography: Coast<br>description: Monograph: Ko`olau Range, slopes above Makapu`u<br>Beach, 29 Dec 1984, Weller & Sakai s.n. [cult. Weller & Sakai 844] (BISH, GH, NY, PTBG, US), Weller & Sakai<br>844 [cult. Wagner & Shannon 6847] (BISH, PTBG, US), Weller & Sakai 844 [cult. Wagner & Shannon 6848]<br>(BISH, PTBG, US)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Makapu'u Beach]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>844</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Monograph: Ko`olau Range, slopes above Makapu`u
+Beach, 29 Dec 1984, Weller & Sakai s.n. [cult. Weller & Sakai 844] (BISH, GH, NY, PTBG, US), Weller & Sakai
+844 [cult. Wagner & Shannon 6847] (BISH, PTBG, US), Weller & Sakai 844 [cult. Wagner & Shannon 6848]
+(BISH, PTBG, US)]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.6602498,21.3097138,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 906]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Koko Head<br>Island: O'ahu<br>Pop_Number: 906<br>Topography: Coast<br>description: [Lots of collections here, labelled Hanauma Bay, Koko Head. Only put one point.] Inventory: 21° 15' 56.22" N	157° 41'40.7" W (this is southeast of here on rocky cliffs). <br>Monograph: Koko Head, NE of Iheihelaualea overlooking Hanauma Bay, Mar 1994, Weller & Sakai s.n.<br>[cult. Weller & Sakai 906] (BISH, US), Weller & Sakai 906 [cult. Wagner & Shannon 6843] (BISH, US), Weller<br>& Sakai 906 [cult. Wagner & Shannon 6844] (BISH, PTBG, US)<br>Coordinates: 21° 15' 56.22" N	157° 41'40.7" W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Koko Head</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>906</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[[Lots of collections here, labelled Hanauma Bay, Koko Head. Only put one point.] Inventory: 21° 15' 56.22" N	157° 41'40.7" W (this is southeast of here on rocky cliffs). 
+Monograph: Koko Head, NE of Iheihelaualea overlooking Hanauma Bay, Mar 1994, Weller & Sakai s.n.
+[cult. Weller & Sakai 906] (BISH, US), Weller & Sakai 906 [cult. Wagner & Shannon 6843] (BISH, US), Weller
+& Sakai 906 [cult. Wagner & Shannon 6844] (BISH, PTBG, US)]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[21° 15' 56.22" N	157° 41'40.7" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.6977226,21.2672447,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Wood 10228</name>
+      <description><![CDATA[Species: globosa<br>Locality: Mokapu Islet<br>Island: Moloka'i<br>Pop_Number: 10228<br>Topography: Islet<br>description: Mokapu Islet<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Mokapu Islet</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>10228</value>
+        </Data>
+        <Data name="Topography">
+          <value>Islet</value>
+        </Data>
+        <Data name="description">
+          <value>Mokapu Islet</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.923821,21.184347,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Wood 102HU</name>
+      <description><![CDATA[Species: globosa<br>Locality: Huelo Islet<br>Island: Moloka'i<br>Pop_Number: 102HU<br>Topography: Islet<br>description: Schiedea globosa, Molokai, Huelo Islet<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Huelo Islet</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>102HU</value>
+        </Data>
+        <Data name="Topography">
+          <value>Islet</value>
+        </Data>
+        <Data name="description">
+          <value>Schiedea globosa, Molokai, Huelo Islet</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.9210359,21.1708617,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 951]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Pohakupule Gulch<br>Island: W Maui<br>Pop_Number: 951<br>Topography: Coast<br>description: Monograph: West Maui, Pohakupule, coastal clay<br>ledges, 30 Mar 1959, O. Degener, I. Degener, W. Fleming 25047<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Pohakupule Gulch</value>
+        </Data>
+        <Data name="Island">
+          <value>W Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>951</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Monograph: West Maui, Pohakupule, coastal clay
+ledges, 30 Mar 1959, O. Degener, I. Degener, W. Fleming 25047</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.6301508,21.0239549,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 905]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Honokoahu Bay<br>Island: W Maui<br>Pop_Number: 905<br>Topography: Coast<br>description: Inventory: 21° 1' 20.9" N	156° 36'43.9" W 122 ft (this is on the west side of the bay). [moved point up/south to elevation]<br>Monograph: West Maui, N of excavation pit near Honokohau<br>Bay, 10 Mar 1994, Weller & Sakai s.n. [cult. Weller & Sakai 905] (BISH, US), Weller & Sakai 905 [cult. Wagner<br>& Shannon 6852] (BISH, US).<br>Coordinates: 21° 1' 20.9" N	156° 36'43.9" W<br>ElevFt: 122]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Honokoahu Bay</value>
+        </Data>
+        <Data name="Island">
+          <value>W Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>905</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: 21° 1' 20.9" N	156° 36'43.9" W 122 ft (this is on the west side of the bay). [moved point up/south to elevation]
+Monograph: West Maui, N of excavation pit near Honokohau
+Bay, 10 Mar 1994, Weller & Sakai s.n. [cult. Weller & Sakai 905] (BISH, US), Weller & Sakai 905 [cult. Wagner
+& Shannon 6852] (BISH, US).]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[21° 1' 20.9" N	156° 36'43.9" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>122.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.60376,21.0288085,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 850]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Waihe'e<br>Island: W Maui<br>Pop_Number: 850<br>Topography: Coast<br>description: 0.7 mi W of Waihe`e along road to Kahakuloa, 16 Dec 1987, Weller &<br>Sakai s.n. [cult. Weller & Sakai 850] (US), Weller & Sakai 850 [cult. Wagner & Shannon 6849] (BISH, US);<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Waihe'e]]></value>
+        </Data>
+        <Data name="Island">
+          <value>W Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>850</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[0.7 mi W of Waihe`e along road to Kahakuloa, 16 Dec 1987, Weller &
+Sakai s.n. [cult. Weller & Sakai 850] (US), Weller & Sakai 850 [cult. Wagner & Shannon 6849] (BISH, US);]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.5145189,20.9512277,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Wood 11221</name>
+      <description><![CDATA[Species: globosa<br>Locality: Paokalani Islet<br>Island: Hawai'i<br>Pop_Number: 11221<br>Topography: Islet<br>description: S. globosa, Paokalani Islet, Wood 11221.pproximately seven patches of Schiedea globosa were observed in early flower around 10 m above the ocean on the northwestern side of the islet It should be noted that the previously mentioned Schiedea globosa (Caryophyllaceae) was observed on both Paokalani and Mokupuku. The presence of S. globosa is very significant in that previous to a survey in 1995 this native species was unknown to occur on the Big Island. In 1995 a single sterile individual was observed on the seacliffs of Waipio and never observed again. Now there appears to be a viable population of this species on these islets. <br><br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Paokalani Islet</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Hawai'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>11221</value>
+        </Data>
+        <Data name="Topography">
+          <value>Islet</value>
+        </Data>
+        <Data name="description">
+          <value>S. globosa, Paokalani Islet, Wood 11221.pproximately seven patches of Schiedea globosa were observed in early flower around 10 m above the ocean on the northwestern side of the islet It should be noted that the previously mentioned Schiedea globosa (Caryophyllaceae) was observed on both Paokalani and Mokupuku. The presence of S. globosa is very significant in that previous to a survey in 1995 this native species was unknown to occur on the Big Island. In 1995 a single sterile individual was observed on the seacliffs of Waipio and never observed again. Now there appears to be a viable population of this species on these islets. 
+</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -155.7030309,20.1927629,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Perlman & Wood 15191]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Waipi'o Valley<br>Island: Hawai'i<br>Pop_Number: 15191<br>Topography: Coast<br>description: Monograph: Hawai`i. Kohala Mts., Waipio Valley, seacliffs E of valley along coast ca. 300 m E of beach, [20°07′12.3″N, 155°35′4.2″W], Perlman & Wood 15191 (PTBG, US)<br>Coordinates: 20°07′12.3″N, 155°35′4.2″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Waipi'o Valley]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Hawai'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>15191</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Monograph: Hawai`i. Kohala Mts., Waipio Valley, seacliffs E of valley along coast ca. 300 m E of beach, [20°07′12.3″N, 155°35′4.2″W], Perlman & Wood 15191 (PTBG, US)]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value>20°07′12.3″N, 155°35′4.2″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -155.5838495,20.1198314,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Wood 13885</name>
+      <description><![CDATA[Species: globosa<br>Locality: Pu'u Kanehoalani<br>Island: O'ahu<br>Pop_Number: 13885<br>Topography: Ridge<br>description: UTM coordinates from Ken Wood: Zone 4, 0619537-2380650. Eleve: 579 m. [Elev seems approximate (1900 ft) and mountain does not go that high - point not moved] ]collected on Kanehoalani, Ken Wood 13885. OAHU: Koolau Mts, 300 m east of Puu Kanehoalani, above Kualoa Ranch, summit peak ridge with very steep slopes, windswept shrubland. 22 plants observed [3 on summit and 19 on steep northwest facing slopes, cuttings and DNA material collected during rappel, <br>Coordinates: UTM Zone 4, 0619537-2380650<br>ElevFt: 1900]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Pu'u Kanehoalani]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>13885</value>
+        </Data>
+        <Data name="Topography">
+          <value>Ridge</value>
+        </Data>
+        <Data name="description">
+          <value>UTM coordinates from Ken Wood: Zone 4, 0619537-2380650. Eleve: 579 m. [Elev seems approximate (1900 ft) and mountain does not go that high - point not moved] ]collected on Kanehoalani, Ken Wood 13885. OAHU: Koolau Mts, 300 m east of Puu Kanehoalani, above Kualoa Ranch, summit peak ridge with very steep slopes, windswept shrubland. 22 plants observed [3 on summit and 19 on steep northwest facing slopes, cuttings and DNA material collected during rappel, </value>
+        </Data>
+        <Data name="Coordinates">
+          <value>UTM Zone 4, 0619537-2380650</value>
+        </Data>
+        <Data name="ElevFt">
+          <value>1900.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.845794617613,21.5245986104485,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Wood 13886</name>
+      <description><![CDATA[Species: globosa<br>Locality: Ka'a'awa<br>Island: O'ahu<br>Pop_Number: 13886<br>Topography: Ridge<br>description: S. globosa collected above Kaaawa, Oahu Ken Wood 13886.  Elevation: 305 m. Koolau Mts, above Kaaawa, Makaua trail up ridge, north facing steep slopes, windswept shrubland. ca 40 plants observed on north facing cliff and slope, cuttings and DNA material collected during rappel.<br>Coordinates: UTM Zone 4, 0618639–2383338<br>ElevFt: 1000]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Ka'a'awa]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>13886</value>
+        </Data>
+        <Data name="Topography">
+          <value>Ridge</value>
+        </Data>
+        <Data name="description">
+          <value>S. globosa collected above Kaaawa, Oahu Ken Wood 13886.  Elevation: 305 m. Koolau Mts, above Kaaawa, Makaua trail up ridge, north facing steep slopes, windswept shrubland. ca 40 plants observed on north facing cliff and slope, cuttings and DNA material collected during rappel.</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>UTM Zone 4, 0618639–2383338</value>
+        </Data>
+        <Data name="ElevFt">
+          <value>1000.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.8542735325,21.5489397474289,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Kawelo s.n . / W&S 964]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Pu'u Kanehoalani<br>Island: O'ahu<br>Pop_Number: 964<br>Topography: Ridge<br>description: Inventory: S.globosa, Kanehoalani-Kawela F	21° 31' 7.4" N	157° 51'18.2" W	1000 ft [point not moved - elevation seems approximate] Collected by Kapua Kawela. 	<br>Monograph: Ko`olau Mountains, near the summit of<br>Pu`ukanehoalani, grown from cuttings supplied by Joel Lau, Weller & Sakai 964 (US)<br>Coordinates: 21° 31' 7.4" N	157° 51'18.2" W<br>ElevFt: 1000]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Pu'u Kanehoalani]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>964</value>
+        </Data>
+        <Data name="Topography">
+          <value>Ridge</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: S.globosa, Kanehoalani-Kawela F	21° 31' 7.4" N	157° 51'18.2" W	1000 ft [point not moved - elevation seems approximate] Collected by Kapua Kawela. 	
+Monograph: Ko`olau Mountains, near the summit of
+Pu`ukanehoalani, grown from cuttings supplied by Joel Lau, Weller & Sakai 964 (US)]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[21° 31' 7.4" N	157° 51'18.2" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>1000.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.855056,21.518722,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 847]]></name>
+      <description><![CDATA[Species: adamantis<br>Locality: Diamond Head<br>Island: O'ahu<br>Pop_Number: 847<br>Topography: <br>description: Inventory: S. adamantis: Plants grown from field-collected seed 21° 16' 03" N	157° 48'15" W	439 ft<br>Coordinates: 21° 16' 03" N	157° 48'15" W<br>ElevFt: 439]]></description>
+      <styleUrl>#icon-503-B7DBAB-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>adamantis</value>
+        </Data>
+        <Data name="Locality">
+          <value>Diamond Head</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>847</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: S. adamantis: Plants grown from field-collected seed 21° 16' 03" N	157° 48'15" W	439 ft]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[21° 16' 03" N	157° 48'15" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>439.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.804166666667,21.2675,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 889]]></name>
+      <description><![CDATA[Species: apokremnos<br>Locality: Napali Cliffs<br>Island: Kaua'i<br>Pop_Number: 889<br>Topography: <br>description: Inventory: 22° 11' 26.8" N	159° 37'58.2" W	416 ft. [Moved point up/southwest to elevation] Monograph: Napali cliffs, s.d., Perlman s.n. [cult. Weller & Sakai 889] (US).<br>Coordinates: 22° 11' 26.8" N	159° 37'58.2" W<br>ElevFt: 416]]></description>
+      <styleUrl>#icon-503-F8971B-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>apokremnos</value>
+        </Data>
+        <Data name="Locality">
+          <value>Napali Cliffs</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Kaua'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>889</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: 22° 11' 26.8" N	159° 37'58.2" W	416 ft. [Moved point up/southwest to elevation] Monograph: Napali cliffs, s.d., Perlman s.n. [cult. Weller & Sakai 889] (US).]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[22° 11' 26.8" N	159° 37'58.2" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>416.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -159.6315714,22.1899135,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 879]]></name>
+      <description><![CDATA[Species: hookeri<br>Locality: Kalua'a Gulch<br>Island: O'ahu<br>Pop_Number: 879<br>Topography: <br>description: Inventory: Schiedea hookeri, Kalua`a Gulch, south of Pu`u Hapapa. 21° 27' 52.3" N	158° 06'9.6" W	2352 ft [ point not moved - elevation not far off]<br>Coordinates: 21° 27' 52.3" N	158° 06'9.6" W<br>ElevFt: 2352]]></description>
+      <styleUrl>#icon-503-F4B400-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>hookeri</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Kalua'a Gulch]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>879</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: Schiedea hookeri, Kalua`a Gulch, south of Pu`u Hapapa. 21° 27' 52.3" N	158° 06'9.6" W	2352 ft [ point not moved - elevation not far off]]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[21° 27' 52.3" N	158° 06'9.6" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>2352.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -158.102666666667,21.4645277777778,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 892]]></name>
+      <description><![CDATA[Species: kaalae<br>Locality: Kalua'a Gulch<br>Island: O'ahu<br>Pop_Number: 892<br>Topography: <br>description: Inventory: 21° 27' 10.8" N	158° 5`39.3" W	2463 ft<br>Coordinates: 21° 27' 10.8" N	158° 5`39.3" W<br>ElevFt: 2463]]></description>
+      <styleUrl>#icon-503-FAD199-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>kaalae</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Kalua'a Gulch]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>892</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: 21° 27' 10.8" N	158° 5`39.3" W	2463 ft]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[21° 27' 10.8" N	158° 5`39.3" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>2463.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -158.09425,21.453,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 904]]></name>
+      <description><![CDATA[Species: kaalae<br>Locality: Pahole Gulch<br>Island: O'ahu<br>Pop_Number: 904<br>Topography: <br>description: Inventory: 21° 32' 41.3" N	158° 11`17.1" W	1438 ft<br>Coordinates: 21° 32' 41.3" N	158° 11`17.1" W<br>ElevFt: 1438]]></description>
+      <styleUrl>#icon-503-FAD199-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>kaalae</value>
+        </Data>
+        <Data name="Locality">
+          <value>Pahole Gulch</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>904</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: 21° 32' 41.3" N	158° 11`17.1" W	1438 ft]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[21° 32' 41.3" N	158° 11`17.1" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>1438.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -158.188083333333,21.5448055555556,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 791]]></name>
+      <description><![CDATA[Species: kealiae<br>Locality: Kealia Trail<br>Island: O'ahu<br>Pop_Number: 791<br>Topography: <br>description: Inventory: 21° 34' 22.3" N	158° 13'27.9" W	471 ft - west of here<br>Coordinates: 21° 34' 22.3" N	158° 13'27.9" W<br>ElevFt: 471]]></description>
+      <styleUrl>#icon-503-009D57-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>kealiae</value>
+        </Data>
+        <Data name="Locality">
+          <value>Kealia Trail</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>791</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: 21° 34' 22.3" N	158° 13'27.9" W	471 ft - west of here]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[21° 34' 22.3" N	158° 13'27.9" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>471.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -158.2097557,21.5728511,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[J. Lau & S. Loo 3951]]></name>
+      <description><![CDATA[Species: laui<br>Locality: Waikolu<br>Island: Moloka'i<br>Pop_Number: 3951<br>Topography: <br>description: Inventory: 21° 07' N	156° 53' W 2979 ft<br>Coordinates: 21° 07' N	156° 53' W<br>ElevFt: 2979]]></description>
+      <styleUrl>#icon-503-4186F0-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>laui</value>
+        </Data>
+        <Data name="Locality">
+          <value>Waikolu</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>3951</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: 21° 07' N	156° 53' W 2979 ft]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[21° 07' N	156° 53' W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>2979.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.883333333333,21.1166666666667,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 873]]></name>
+      <description><![CDATA[Species: ligustrina<br>Locality: Lualualei<br>Island: O'ahu<br>Pop_Number: 873<br>Topography: <br>description: Inventory: 21° 27'02.63" N	158° 08'17.92" W	849 ft [ moved miles upslope to match elevation, guessing south of fourth bunker on first road]<br>Monograph: ridge S of bunker<br>4AT15 at Lualualei Magazine, 27 Feb 1990, Weller & Sakai s.n. [cult. Weller & Sakai 873] (US); Weller & Sakai<br>873 [cult. Wagner & Shannon 6860] (BISH, PTBG, US).<br>Coordinates: 21° 27'02.63" N	158° 08'17.92" W<br>ElevFt: 849]]></description>
+      <styleUrl>#icon-503-D698AD-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>ligustrina</value>
+        </Data>
+        <Data name="Locality">
+          <value>Lualualei</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>873</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: 21° 27'02.63" N	158° 08'17.92" W	849 ft [ moved miles upslope to match elevation, guessing south of fourth bunker on first road]
+Monograph: ridge S of bunker
+4AT15 at Lualualei Magazine, 27 Feb 1990, Weller & Sakai s.n. [cult. Weller & Sakai 873] (US); Weller & Sakai
+873 [cult. Wagner & Shannon 6860] (BISH, PTBG, US).]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[21° 27'02.63" N	158° 08'17.92" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>849.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -158.1122561,21.4549694,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 864]]></name>
+      <description><![CDATA[Species: membranacea<br>Locality: Mahanaloa Gulch<br>Island: Kaua'i<br>Pop_Number: 864<br>Topography: <br>description: Inventory: 22° 08' 18" N	159° 42'6.2" W	1841 ft<br>Coordinates: 22° 08' 18" N	159° 42'6.2" W<br>ElevFt: 1841]]></description>
+      <styleUrl>#icon-503-795046-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>membranacea</value>
+        </Data>
+        <Data name="Locality">
+          <value>Mahanaloa Gulch</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Kaua'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>864</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: 22° 08' 18" N	159° 42'6.2" W	1841 ft]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[22° 08' 18" N	159° 42'6.2" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>1841.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -159.701722222222,22.1383333333333,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 949]]></name>
+      <description><![CDATA[Species: menziesii<br>Locality: Hahakea Gulch<br>Island: W Maui<br>Pop_Number: 949<br>Topography: <br>description: Inventory: 20° 54' 36.8" N	156° 38' 47.4" W	1259 ft<br>Coordinates: 20° 54' 36.8" N	156° 38' 47.4" W<br>ElevFt: 1259]]></description>
+      <styleUrl>#icon-503-F9F7A6-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>menziesii</value>
+        </Data>
+        <Data name="Locality">
+          <value>Hahakea Gulch</value>
+        </Data>
+        <Data name="Island">
+          <value>W Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>949</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: 20° 54' 36.8" N	156° 38' 47.4" W	1259 ft]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[20° 54' 36.8" N	156° 38' 47.4" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>1259.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.6465,20.9102222222222,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 897]]></name>
+      <description><![CDATA[Species: obovata<br>Locality: Keawapilau Gulch<br>Island: O'ahu<br>Pop_Number: 897<br>Topography: <br>description: Inventory: Schiedea obovata, Keawapilau Gulch, 2100 ft, June 14, 1992  21° 31' 52.9" N	158° 10`39.2" W	2182 ft<br>Coordinates: 21° 31' 52.9" N	158° 10`39.2" W<br>ElevFt: 2182]]></description>
+      <styleUrl>#icon-503-7C3592-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>obovata</value>
+        </Data>
+        <Data name="Locality">
+          <value>Keawapilau Gulch</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>897</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: Schiedea obovata, Keawapilau Gulch, 2100 ft, June 14, 1992  21° 31' 52.9" N	158° 10`39.2" W	2182 ft]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[21° 31' 52.9" N	158° 10`39.2" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>2182.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -158.177555555556,21.5313611111111,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Perlman
+& Wood 14765]]></name>
+      <description><![CDATA[Species: stellarioides<br>Locality: Waialae Valley<br>Island: Kaua'i<br>Pop_Number: 14765<br>Topography: <br>description: Inventory: 22° 04' 14.9" N	159° 36'4.3" W	3459 ft<br>Coordinates: 22° 04' 14.9" N	159° 36'4.3" W<br>ElevFt: 3459]]></description>
+      <styleUrl>#icon-503-B29189-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>stellarioides</value>
+        </Data>
+        <Data name="Locality">
+          <value>Waialae Valley</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Kaua'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>14765</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: 22° 04' 14.9" N	159° 36'4.3" W	3459 ft]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[22° 04' 14.9" N	159° 36'4.3" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>3459.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -159.601194444444,22.0708055555556,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Perlman
+& Wood 14651]]></name>
+      <description><![CDATA[Species: stellarioides<br>Locality: Waialae Valley<br>Island: Kaua'i<br>Pop_Number: 14651<br>Topography: <br>description: Inventory: 22° 04' 14.9" N	159° 36'4.3" W	3459 ft<br>Coordinates: 22° 04' 14.9" N	159° 36'4.3" W<br>ElevFt: 3459]]></description>
+      <styleUrl>#icon-503-B29189-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>stellarioides</value>
+        </Data>
+        <Data name="Locality">
+          <value>Waialae Valley</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Kaua'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>14651</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: 22° 04' 14.9" N	159° 36'4.3" W	3459 ft]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[22° 04' 14.9" N	159° 36'4.3" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>3459.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -159.601194444444,22.0708055555556,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 880]]></name>
+      <description><![CDATA[Species: verticillata<br>Locality: Nihoa<br>Island: Nihoa<br>Pop_Number: 880<br>Topography: <br>description: Inventory: 23° 03' 34.6" N	161° 55'30.2" W	122 ft<br>Coordinates: 23° 03' 34.6" N	161° 55'30.2" W<br>ElevFt: 122]]></description>
+      <styleUrl>#icon-503-EE9C96-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>verticillata</value>
+        </Data>
+        <Data name="Locality">
+          <value>Nihoa</value>
+        </Data>
+        <Data name="Island">
+          <value>Nihoa</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>880</value>
+        </Data>
+        <Data name="Topography">
+          <value/>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Inventory: 23° 03' 34.6" N	161° 55'30.2" W	122 ft]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value><![CDATA[23° 03' 34.6" N	161° 55'30.2" W]]></value>
+        </Data>
+        <Data name="ElevFt">
+          <value>122.0</value>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -161.925055555556,23.0596111111111,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Remy 551bis</name>
+      <description><![CDATA[Species: globosa<br>Locality: Lana'i<br>Island: Lana'i<br>Pop_Number: 551bis<br>Topography: Coast<br>description: Lana`i. without locality, Rémy 551bis (P). <br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Lana'i]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Lana'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>551bis</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Lana`i. without locality, Rémy 551bis (P). </value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.9365215,20.9215606,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Degener 21952</name>
+      <description><![CDATA[Species: globosa<br>Locality: Maliko Bay<br>Island: E Maui<br>Pop_Number: 21952<br>Topography: Coast<br>description: Maliko near Pa`ia, [20°56′15.7″N, 156°20′29.3″W],<br>Degener 21952 (B, BISH, F, G, K, MO, NY, P, PH, UC)<br>Coordinates: 20°56′15.7″N, 156°20′29.3″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Maliko Bay</value>
+        </Data>
+        <Data name="Island">
+          <value>E Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>21952</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Maliko near Pa`ia, [20°56′15.7″N, 156°20′29.3″W],
+Degener 21952 (B, BISH, F, G, K, MO, NY, P, PH, UC)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>20°56′15.7″N, 156°20′29.3″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.341472222222,20.9376944444444,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Forbes 267.M</name>
+      <description><![CDATA[Species: globosa<br>Locality: Pu'uki'i Islet<br>Island: E Maui<br>Pop_Number: 267.M<br>Topography: Islet<br>description: Hana, [20°45′26.1″N, 155°58′46.3″W], Forbes 267.M<br>(BISH, MO, NY, UC, US)<br>Coordinates: 20°45′26.1″N, 155°58′46.3″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Pu'uki'i Islet]]></value>
+        </Data>
+        <Data name="Island">
+          <value>E Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>267.M</value>
+        </Data>
+        <Data name="Topography">
+          <value>Islet</value>
+        </Data>
+        <Data name="description">
+          <value>Hana, [20°45′26.1″N, 155°58′46.3″W], Forbes 267.M
+(BISH, MO, NY, UC, US)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>20°45′26.1″N, 155°58′46.3″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -155.979527777778,20.75725,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Hobdy 1302</name>
+      <description><![CDATA[Species: globosa<br>Locality: 'Alau Islet<br>Island: E Maui<br>Pop_Number: 1302<br>Topography: Islet<br>description: `Alau Island, [20°43′42.6″N, 155°58′38.8″W], Hobdy 1302 (BISH). See doi:10.13140/2.1.2758.1446 - Starr report says Schiedea are on sheer west face below coconuts.<br>Coordinates: [20°43′42.6″N, 155°58′38.8″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA['Alau Islet]]></value>
+        </Data>
+        <Data name="Island">
+          <value>E Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>1302</value>
+        </Data>
+        <Data name="Topography">
+          <value>Islet</value>
+        </Data>
+        <Data name="description">
+          <value>`Alau Island, [20°43′42.6″N, 155°58′38.8″W], Hobdy 1302 (BISH). See doi:10.13140/2.1.2758.1446 - Starr report says Schiedea are on sheer west face below coconuts.</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>[20°43′42.6″N, 155°58′38.8″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -155.9774444,20.7285,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Degener 21964</name>
+      <description><![CDATA[Species: globosa<br>Locality: Kahakuloa<br>Island: W Maui<br>Pop_Number: 21964<br>Topography: Coast<br>description: Kahakuloa, [20°59′52.4″N, 156°32′35.5″W], Degener 21964 (B, BISH, G, GB, MASS, MO, NY, P,<br>S, UC, US)<br>Coordinates: 20°59′52.4″N, 156°32′35.5″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Kahakuloa</value>
+        </Data>
+        <Data name="Island">
+          <value>W Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>21964</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Kahakuloa, [20°59′52.4″N, 156°32′35.5″W], Degener 21964 (B, BISH, G, GB, MASS, MO, NY, P,
+S, UC, US)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>20°59′52.4″N, 156°32′35.5″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.543194444444,20.9978888888889,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Forbes & Stokes 314.M]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Pu'ukoa'e<br>Island: W MAui<br>Pop_Number: 314.M<br>Topography: Coast<br>description: summit of Pu`ukoa`e, Forbes & Stokes 314.M (BH, BISH, NY)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Pu'ukoa'e]]></value>
+        </Data>
+        <Data name="Island">
+          <value>W MAui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>314.M</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[summit of Pu`ukoa`e, Forbes & Stokes 314.M (BH, BISH, NY)]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.5453693,21.0011246,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Hobdy 2480</name>
+      <description><![CDATA[Species: globosa<br>Locality: Kukuipuka<br>Island: W Maui<br>Pop_Number: 2480<br>Topography: Coast<br>description: N coastline at Kukuipuka (N of<br>Waihe`e), Hobdy 2480 (BISH), Hobdy 2481 (BISH)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Kukuipuka</value>
+        </Data>
+        <Data name="Island">
+          <value>W Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>2480</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>N coastline at Kukuipuka (N of
+Waihe`e), Hobdy 2480 (BISH), Hobdy 2481 (BISH)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.5198224,20.95998,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Oppenheimer H40017</name>
+      <description><![CDATA[Species: globosa<br>Locality: Honolua Bay<br>Island: W Maui<br>Pop_Number: H40017<br>Topography: Coast<br>description: Honolua, scattered between Kamane and Punalau, Oppenheimer H40017 (PTBG)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Honolua Bay</value>
+        </Data>
+        <Data name="Island">
+          <value>W Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>H40017</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Honolua, scattered between Kamane and Punalau, Oppenheimer H40017 (PTBG)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.6364238,21.0245857,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Perlman & Wood 16202]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Pu'u Kahulianapa<br>Island: W Maui<br>Pop_Number: 16202<br>Topography: Coast<br>description: Kahakuloa, on Pu`ukahulianapa, Perlman & Wood 16202 (PTBG)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Pu'u Kahulianapa]]></value>
+        </Data>
+        <Data name="Island">
+          <value>W Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>16202</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Kahakuloa, on Pu`ukahulianapa, Perlman & Wood 16202 (PTBG)]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.5439052,20.9977396,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>St. John 26717</name>
+      <description><![CDATA[Species: globosa<br>Locality: Laho'ole<br>Island: W Maui<br>Pop_Number: 26717<br>Topography: Coast<br>description: Laho`ole, St. John<br>26717 (BISH)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Laho'ole]]></value>
+        </Data>
+        <Data name="Island">
+          <value>W Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>26717</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Laho`ole, St. John
+26717 (BISH)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.5271226,20.9689248,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Sylva & Clarke s.n.]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Makamaka'ole Stream<br>Island: W Maui<br>Pop_Number: SC1979<br>Topography: Coast<br>description: Wailuku, Kahakuloa, right side mouth of Makamaka`ole Stream, 8 Jul 1979, Sylva & Clarke s.n.<br>(HAW)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Makamaka'ole Stream]]></value>
+        </Data>
+        <Data name="Island">
+          <value>W Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>SC1979</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Wailuku, Kahakuloa, right side mouth of Makamaka`ole Stream, 8 Jul 1979, Sylva & Clarke s.n.
+(HAW)]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.5254228,20.9638146,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 852]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Kahakuloa Bay<br>Island: W Maui<br>Pop_Number: 852<br>Topography: Coast<br>description: 2 entries. rocky bluff overlooking Kahakuloa Bay, N and NW facing slope, Weller & Sakai 852 (US) AND Kahakuloa Bay, [20°59′52.4″N, 156°32′35.5″W], Weller & Sakai 852 (US)<br>Coordinates: 20°59′52.4″N, 156°32′35.5″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Kahakuloa Bay</value>
+        </Data>
+        <Data name="Island">
+          <value>W Maui</value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>852</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[2 entries. rocky bluff overlooking Kahakuloa Bay, N and NW facing slope, Weller & Sakai 852 (US) AND Kahakuloa Bay, [20°59′52.4″N, 156°32′35.5″W], Weller & Sakai 852 (US)]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value>20°59′52.4″N, 156°32′35.5″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.5431944,20.9978889,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Coore s.n.</name>
+      <description><![CDATA[Species: globosa<br>Locality: Mo'omomi<br>Island: Moloka'i<br>Pop_Number: C1915<br>Topography: Coast<br>description: Near Mo`omomi, [21°12′1.3″N, 157°9′37.2″W], Feb 1915, Coore s.n. (BISH)<br>Coordinates: 21°12′1.3″N, 157°9′37.2″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Mo'omomi]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>C1915</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Near Mo`omomi, [21°12′1.3″N, 157°9′37.2″W], Feb 1915, Coore s.n. (BISH)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°12′1.3″N, 157°9′37.2″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.160333333333,21.2003611111111,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Degener 5938</name>
+      <description><![CDATA[Species: globosa<br>Locality: Halawa Valley<br>Island: Moloka'i<br>Pop_Number: 5938<br>Topography: Coast<br>description: W side of Halawa Valley,<br>[21°10′15.3″N, 156°44′20.6″W], Degener 5938 (B, F, G, K, NY [2], UC)<br>Coordinates: 21°10′15.3″N, 156°44′20.6″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Halawa Valley</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>5938</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>W side of Halawa Valley,
+[21°10′15.3″N, 156°44′20.6″W], Degener 5938 (B, F, G, K, NY [2], UC)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°10′15.3″N, 156°44′20.6″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.739055555556,21.1709166666667,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Degener 5939</name>
+      <description><![CDATA[Species: globosa<br>Locality: Halawa Iki Gulch<br>Island: Moloka'i<br>Pop_Number: 5939<br>Topography: Coast<br>description: between Halawa Valley and Halawa<br>Iki Gulch, Degener 5939 (F, K, NY)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Halawa Iki Gulch</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>5939</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>between Halawa Valley and Halawa
+Iki Gulch, Degener 5939 (F, K, NY)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.7396364,21.165321,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Degener 5941</name>
+      <description><![CDATA[Species: globosa<br>Locality: Kalaupapa<br>Island: Moloka'i<br>Pop_Number: 5941<br>Topography: Coast<br>description: [moved south from the coordinates to the cliffs] cliffs just SW of Kalaupapa leper settlement, [21°10′53.9″N,<br>156°59′40.3″W], Degener 5941 (F, NY)<br>Coordinates: 21°10′53.9″N,<br>156°59′40.3″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Kalaupapa</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>5941</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>[moved south from the coordinates to the cliffs] cliffs just SW of Kalaupapa leper settlement, [21°10′53.9″N,
+156°59′40.3″W], Degener 5941 (F, NY)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°10′53.9″N,
+156°59′40.3″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.9965314,21.1766618,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Degener 5943</name>
+      <description><![CDATA[Species: globosa<br>Locality: Ho'olehua<br>Island: Moloka'i<br>Pop_Number: 5943<br>Topography: Coast<br>description: [Moved from coordinates south to cliffs] N of Ho`olehua, [21°11′20″N, 157°3′52″W], Degener 5943 (F, GH,<br>NY)<br>Coordinates: 21°11′20″N, 157°3′52″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Ho'olehua]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>5943</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>[Moved from coordinates south to cliffs] N of Ho`olehua, [21°11′20″N, 157°3′52″W], Degener 5943 (F, GH,
+NY)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°11′20″N, 157°3′52″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.0643773,21.1868057,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Degener & Nitta 5946]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Wailau Valley<br>Island: Moloka'i<br>Pop_Number: 5946<br>Topography: Coast<br>description: Wailau Valley, Degener & Nitta 5946 (F)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Wailau Valley</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>5946</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Wailau Valley, Degener & Nitta 5946 (F)]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.8346543,21.1637604,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Faurie 1086</name>
+      <description><![CDATA[Species: globosa<br>Locality: Wailau Valley<br>Island: Moloka'i<br>Pop_Number: 1086<br>Topography: Coast<br>description: [moved south from coords to cliffs] in rupibus littoris Wailau, [21°10′5″N, 156°50′20″W], Faurie<br>1086 (BISH, G, P)<br>Coordinates: 21°10′5″N, 156°50′20″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Wailau Valley</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>1086</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>[moved south from coords to cliffs] in rupibus littoris Wailau, [21°10′5″N, 156°50′20″W], Faurie
+1086 (BISH, G, P)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°10′5″N, 156°50′20″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.8386314,21.1643137,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Forbes 22.Mo</name>
+      <description><![CDATA[Species: globosa<br>Locality: Kalaupapa<br>Island: Moloka'i<br>Pop_Number: 22.Mo<br>Topography: Coast<br>description: Settlement Trail, Forbes 22.Mo (BISH);<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Kalaupapa</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>22.Mo</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Settlement Trail, Forbes 22.Mo (BISH);</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.9965958,21.1766949,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Forbes 529.Mo</name>
+      <description><![CDATA[Species: globosa<br>Locality: Wailau Valley<br>Island: Moloka'i<br>Pop_Number: 529.Mo<br>Topography: Coast<br>description: near the coast between Wailau and Wai`ehu [see Hawaiian Place Names (Soehren) for Waiehu flats, Waiehu Falls == Waiele Falls], Forbes<br>529.Mo (BISH, P, UC, US)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Wailau Valley</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>529.Mo</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>near the coast between Wailau and Wai`ehu [see Hawaiian Place Names (Soehren) for Waiehu flats, Waiehu Falls == Waiele Falls], Forbes
+529.Mo (BISH, P, UC, US)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.8400808,21.1651312,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Forbes 594.Mo</name>
+      <description><![CDATA[Species: globosa<br>Locality: Moanui Valley<br>Island: Moloka'i<br>Pop_Number: 594.Mo<br>Topography: Coast<br>description: Moanui, [21°6′14.7″N, 156°44′57.5″W], Forbes 594.Mo (A, BISH)<br>Coordinates: 21°6′14.7″N, 156°44′57.5″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Moanui Valley</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>594.Mo</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Moanui, [21°6′14.7″N, 156°44′57.5″W], Forbes 594.Mo (A, BISH)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°6′14.7″N, 156°44′57.5″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.749305555556,21.1040833333333,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Hillebrand s.n.</name>
+      <description><![CDATA[Species: globosa<br>Locality: Waikolu Vallley<br>Island: Moloka'i<br>Pop_Number: HWaikolu<br>Topography: Coast<br>description: seashore of<br>Waikolu, s.d., Hillebrand s.n. (BISH-fragment from B)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Waikolu Vallley</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>HWaikolu</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>seashore of
+Waikolu, s.d., Hillebrand s.n. (BISH-fragment from B)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.9308218,21.1690079,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Hobdy 2177</name>
+      <description><![CDATA[Species: globosa<br>Locality: Kaholaiki Bay<br>Island: Moloka'i<br>Pop_Number: 2177<br>Topography: Coast<br>description: [moved from coordinates south to land] Kaholaiki Bay, [21°9′53″N, 156°52′31″W], Hobdy 2177 (BISH)<br>Coordinates: 21°9′53″N, 156°52′31″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Kaholaiki Bay</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>2177</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>[moved from coordinates south to land] Kaholaiki Bay, [21°9′53″N, 156°52′31″W], Hobdy 2177 (BISH)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°9′53″N, 156°52′31″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.8752724,21.164377,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Nagata 1856</name>
+      <description><![CDATA[Species: globosa<br>Locality: Maneopapa Gulch<br>Island: Moloka'i<br>Pop_Number: 1856<br>Topography: Coast<br>description: sea cliffs N of Ho`olehua near Manaeopapa, Nagata 1856<br>(BISH)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Maneopapa Gulch</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>1856</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>sea cliffs N of Ho`olehua near Manaeopapa, Nagata 1856
+(BISH)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.1015874,21.1955655,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Perlman 6223</name>
+      <description><![CDATA[Species: globosa<br>Locality: Ha'upu Bay<br>Island: Moloka'i<br>Pop_Number: 6223<br>Topography: Coast<br>description: Ka`aloa, above Haupu Bay, Perlman 6223 (PTBG)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Ha'upu Bay]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>6223</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Ka`aloa, above Haupu Bay, Perlman 6223 (PTBG)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.9027052,21.163703,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Perlman & Wood 17531]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Waiehu Shelf<br>Island: Moloka'i<br>Pop_Number: 17531<br>Topography: Coast<br>description: Waiehu, W of Wailau, coastal<br>cliffs above Waiehu shelf, Perlman & Wood 17531 (PTBG)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Waiehu Shelf</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>17531</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Waiehu, W of Wailau, coastal
+cliffs above Waiehu shelf, Perlman & Wood 17531 (PTBG)]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.8428662,21.1637354,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Perlman 16993</name>
+      <description><![CDATA[Species: globosa<br>Locality: Mokapu Islet<br>Island: Moloka'i<br>Pop_Number: 16993<br>Topography: Islet<br>description: Mokapu Islet, offshore islet off N coast, N side of<br>islet, Perlman et al. 16993 (PTBG)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Mokapu Islet</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>16993</value>
+        </Data>
+        <Data name="Topography">
+          <value>Islet</value>
+        </Data>
+        <Data name="description">
+          <value>Mokapu Islet, offshore islet off N coast, N side of
+islet, Perlman et al. 16993 (PTBG)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.9237977,21.184215,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Rock 6184</name>
+      <description><![CDATA[Species: globosa<br>Locality: Waikolu Valley<br>Island: Moloka'i<br>Pop_Number: 6184<br>Topography: Coast<br>description: Waikolu, Rock 6184 (BISH, F, GH [2], NY,<br>P, US)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Waikolu Valley</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>6184</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Waikolu, Rock 6184 (BISH, F, GH [2], NY,
+P, US)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.9308649,21.1689953,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Rick 7007</name>
+      <description><![CDATA[Species: globosa<br>Locality: Wailau Valley<br>Island: Moloka'i<br>Pop_Number: 7007<br>Topography: Coast<br>description: Wailau Valley, Rock 7007 (BISH)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Wailau Valley</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>7007</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Wailau Valley, Rock 7007 (BISH)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.8347861,21.1638025,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>St. John et. al. 23414</name>
+      <description><![CDATA[Species: globosa<br>Locality: Pu'ukauwa<br>Island: Moloka'i<br>Pop_Number: 23414<br>Topography: Coast<br>description: Pu`ukauwa, Waikolu, base of sea cliff, [21°10′9.2″N, 156°56′3.5″W], St. John et. al. 23414 (BISH [2])<br>Coordinates: 21°10′9.2″N, 156°56′3.5″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Pu'ukauwa]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>23414</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Pu`ukauwa, Waikolu, base of sea cliff, [21°10′9.2″N, 156°56′3.5″W], St. John et. al. 23414 (BISH [2])</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°10′9.2″N, 156°56′3.5″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.934305555556,21.1692222222222,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Wagner & Lorence 5741]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Anapuhi-Wainene<br>Island: Moloka'i<br>Pop_Number: 5741<br>Topography: Coast<br>description: Anapuhi to Wainene, long coastal boulder-strewn beach, vertical cliff 10-30 m from water, [21°9′52.7″N,<br>156°54′40.3″W], Wagner & Lorence 5741 (BISH);<br>Coordinates: 21°9′52.7″N,<br>156°54′40.3″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Anapuhi-Wainene</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>5741</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Anapuhi to Wainene, long coastal boulder-strewn beach, vertical cliff 10-30 m from water, [21°9′52.7″N,
+156°54′40.3″W], Wagner & Lorence 5741 (BISH);]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°9′52.7″N,
+156°54′40.3″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.911194444444,21.1646388888889,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Wood et al. 3829</name>
+      <description><![CDATA[Species: globosa<br>Locality: Huelo Islet<br>Island: Moloka'i<br>Pop_Number: 3829<br>Topography: Islet<br>description: Huelo Islet, [21°10′15″N, 156°55′16.7″W], Wood et. al.<br>3829 (PTBG, US)<br>Coordinates: 21°10′15″N, 156°55′16.7″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Huelo Islet</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>3829</value>
+        </Data>
+        <Data name="Topography">
+          <value>Islet</value>
+        </Data>
+        <Data name="description">
+          <value>Huelo Islet, [21°10′15″N, 156°55′16.7″W], Wood et. al.
+3829 (PTBG, US)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°10′15″N, 156°55′16.7″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.921305555556,21.1708333333333,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Wood 3818</name>
+      <description><![CDATA[Species: globosa<br>Locality: Wailau Valley<br>Island: Moloka'i<br>Pop_Number: 3818<br>Topography: Coast<br>description: Wailau Valley, seacliffs of Wailau, Wood 3818 (PTBG)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Wailau Valley</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>3818</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>Wailau Valley, seacliffs of Wailau, Wood 3818 (PTBG)</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -156.8349111,21.1637947,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W&S 909]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Mokio Point<br>Island: Moloka'i<br>Pop_Number: 909<br>Topography: Coast<br>description: Mokio Point, 1994, M. Bruegmann s.n. [cult. Weller & Sakai 909]<br>(US)<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Mokio Point</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>909</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Mokio Point, 1994, M. Bruegmann s.n. [cult. Weller & Sakai 909]
+(US)]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.212193,21.2200642,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[W & S 871]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Ho'olehua<br>Island: Moloka'i<br>Pop_Number: 871<br>Topography: Coast<br>description: [moved south to land] N coast, cliffs near dump site near Hawaiian Home Lands, [21°11′20″N, 157°03′52″W], Weller & Sakai<br>871, Weller & Sakai 871 [cult. Wagner & Shannon 6850] (US)<br>Coordinates: 21°11′20″N, 157°03′52″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Ho'olehua]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[Moloka'i]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>871</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[[moved south to land] N coast, cliffs near dump site near Hawaiian Home Lands, [21°11′20″N, 157°03′52″W], Weller & Sakai
+871, Weller & Sakai 871 [cult. Wagner & Shannon 6850] (US)]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°11′20″N, 157°03′52″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.0645088,21.1874584,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Char 70</name>
+      <description><![CDATA[Species: globosa<br>Locality: Makapu'u<br>Island: O'ahu<br>Pop_Number: 70<br>Topography: Coast<br>description: [many other collections here - all suggest the are below the road or say head of head of Kealakipapa, the valley with the road] Makapu`u, on cliffs makai of road, Char 70 (HAW [2])<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Makapu'u]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>70</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>[many other collections here - all suggest the are below the road or say head of head of Kealakipapa, the valley with the road] Makapu`u, on cliffs makai of road, Char 70 (HAW [2])</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.6574238,21.3094446,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Nuttall s.n.</name>
+      <description><![CDATA[Species: globosa<br>Locality: Nu'uanu Pali<br>Island: O'ahu<br>Pop_Number: Nuuanu<br>Topography: Ridge<br>description: rocks of Nu`uanu Pali, s.d., Nuttall s.n. (F);<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Nu'uanu Pali]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>Nuuanu</value>
+        </Data>
+        <Data name="Topography">
+          <value>Ridge</value>
+        </Data>
+        <Data name="description">
+          <value>rocks of Nu`uanu Pali, s.d., Nuttall s.n. (F);</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.7927738,21.3672425,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>St. John 12981</name>
+      <description><![CDATA[Species: globosa<br>Locality: Kalama-Mau'uwai<br>Island: O'ahu<br>Pop_Number: 12981<br>Topography: Ridge<br>description: Kalama-Mau`uwaii summit, Maunalua, St. John 20133 (A, BISH, G, UC), St. John 20134 (BISH, GH);<br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Kalama-Mau'uwai]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>12981</value>
+        </Data>
+        <Data name="Topography">
+          <value>Ridge</value>
+        </Data>
+        <Data name="description">
+          <value>Kalama-Mau`uwaii summit, Maunalua, St. John 20133 (A, BISH, G, UC), St. John 20134 (BISH, GH);</value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.6684064,21.3133364,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Degener & Park 5924]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Makapu'u Head<br>Island: O'ahu<br>Pop_Number: 5924<br>Topography: Coast<br>description: [moved southeast from coords to cliff] Makapu`u Head, [21°18′36.3″N, 157°39′1.4″W], Degener & Park 5924 (B, F [2], G, GH [2], NY, P, UC);<br>Coordinates: 21°18′36.3″N, 157°39′1.4″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Makapu'u Head]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>5924</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[[moved southeast from coords to cliff] Makapu`u Head, [21°18′36.3″N, 157°39′1.4″W], Degener & Park 5924 (B, F [2], G, GH [2], NY, P, UC);]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°18′36.3″N, 157°39′1.4″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.6500027,21.3099684,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Herbst 1370</name>
+      <description><![CDATA[Species: globosa<br>Locality: Makapu'u Beach<br>Island: O'ahu<br>Pop_Number: 1370<br>Topography: Coast<br>description: arid cliffs above Makapu`u Beach, [21°18′35.4″N, 157°39′37.2″W], Herbst 1370 (BH, GB, HAW);<br>Coordinates: 21°18′35.4″N, 157°39′37.2″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Makapu'u Beach]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>1370</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value>arid cliffs above Makapu`u Beach, [21°18′35.4″N, 157°39′37.2″W], Herbst 1370 (BH, GB, HAW);</value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°18′35.4″N, 157°39′37.2″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.660333333333,21.3098333333333,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Degener & Degener 24085]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Waimanalo<br>Island: O'ahu<br>Pop_Number: 24085<br>Topography: Coast<br>description: [many collections here, SW of Waimanalo Landing (Huli St-Hwy intersection), cliff by roadside facing Waimanalo Bay] E of Waimanalo, on exposed ledge, [21°19′29.3″N, 157°41′10.9″W], Degener & Degener 24085 (BM, GB, US);<br>Coordinates: 21°19′29.3″N, 157°41′10.9″W<br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value>Waimanalo</value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>24085</value>
+        </Data>
+        <Data name="Topography">
+          <value>Coast</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[[many collections here, SW of Waimanalo Landing (Huli St-Hwy intersection), cliff by roadside facing Waimanalo Bay] E of Waimanalo, on exposed ledge, [21°19′29.3″N, 157°41′10.9″W], Degener & Degener 24085 (BM, GB, US);]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value>21°19′29.3″N, 157°41′10.9″W</value>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.686361111111,21.3248055555556,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Obata & Funk 401]]></name>
+      <description><![CDATA[Species: globosa<br>Locality: Makapu'u<br>Island: O'ahu<br>Pop_Number: 401<br>Topography: Ridge<br>description: Ko`olau ridge top, above Sea Life Park, Waimanalo, Obata & Funk 401 (BISH);<br><br>Coordinates: <br>ElevFt: ]]></description>
+      <styleUrl>#icon-503-FFDD5E-labelson</styleUrl>
+      <ExtendedData>
+        <Data name="Species">
+          <value>globosa</value>
+        </Data>
+        <Data name="Locality">
+          <value><![CDATA[Makapu'u]]></value>
+        </Data>
+        <Data name="Island">
+          <value><![CDATA[O'ahu]]></value>
+        </Data>
+        <Data name="Pop_Number">
+          <value>401</value>
+        </Data>
+        <Data name="Topography">
+          <value>Ridge</value>
+        </Data>
+        <Data name="description">
+          <value><![CDATA[Ko`olau ridge top, above Sea Life Park, Waimanalo, Obata & Funk 401 (BISH);
+]]></value>
+        </Data>
+        <Data name="Coordinates">
+          <value/>
+        </Data>
+        <Data name="ElevFt">
+          <value/>
+        </Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>
+          -157.6652699,21.3116861,0
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

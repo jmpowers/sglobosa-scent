@@ -1,0 +1,25 @@
+type,subtype,standard,exact_subtype,notes
+aliphatic,alcohol,Hexenol,1,
+aliphatic,aldehyde,Hexenol,0,
+aliphatic,alkane,Hexenol,0,
+aliphatic,alkene,Hexenol,0,
+aliphatic,carboxylic acid,Hexenol,0,
+aliphatic,ester,Hexenol,0,
+aliphatic,ether,Hexenol,0,
+aliphatic,ketone,Hexenol,0,
+benzenoid,alcohol,Benzaldehyde,0,
+benzenoid,aldehyde,Benzaldehyde,1,
+benzenoid,carboxylic acid,Methyl_salicylate,0,
+benzenoid,ester,Methyl_salicylate,1,
+benzenoid,ether,Methyl_salicylate,0,
+N-compound,aldoxime,Hexenol,0,Indole has N but also two rings
+N-compound,nitrile,Hexenol,0,Indole has N but also two rings
+N-compound,nitroalkane,Hexenol,0,Indole has N but also two rings
+N-compound,pyrazine,Hexenol,0,Indole has N but also two rings
+terpene,acyclic monoterpene alcohol,Linalool,1,
+terpene,cyclic monoterpene,alpha_Pinene,1,
+terpene,cyclic monoterpene alcohol,alpha_Pinene,0,
+terpene,cyclic sesquiterpene,Caryophyllene,1,
+terpene,homoterpene,Linalool,0,
+terpene,acyclic sesquiterpene alcohol,Farnesol,1,Added this to the subtypes list
+N-compound,pyrrole,Indole,1,Added this to the subtypes list
