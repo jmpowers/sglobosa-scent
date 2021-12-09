@@ -12,6 +12,57 @@ range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 setwd("~/MyDocs/MEGA/UCI/Schiedea/Analysis/scent/rmbl/Schiedea")
 source("../read_shimadzu.R")
 
+# Schiedea runs -----------------------------------------------------------
+#Section moved from  ../Inventory/markes_sequence.R, needs to be integrated with rest
+Powers <- grepl("Powers RMBL Data", sequ.summary$FullName, fixed=T)
+schiedea.ids <- sequ.summary %>% filter(Powers) %>% select(id) %>% unique %>% na.omit
+schgc <- sequ.summary %>% filter(id %in% schiedea.ids$id | Powers)
+schgc$vial <- as.integer(str_match(schgc$FileName, "_V(\\d{1,3})")[,2])
+schgc$dupe <- !is.na(schgc$vial) & schgc$vial %in% schgc$vial[duplicated(schgc$vial)]
+#Run  kmeans first
+schgc <- cbind(schgc, sch.km[,-1])
+rownames(schgc) <- 1:nrow(schgc)
+setwd("../Schiedea")
+notebook <- read.delim("leak_notebook.csv")
+schgc <- cbind(schgc, notebook[match(schgc$vial, as.integer(as.character(notebook$Vial)), incomparables=NA),-4])
+schgc$TubeMatch <- schgc$Tube == schgc$SteelTube
+write.csv(schgc, "schiedea_all190815.csv")
+#read back the verdicts
+rmbl <- gs_title("Schiedea RMBL GC-MS Inventory")
+schgc.verdict <- gs_read(rmbl)
+schgc$verdict <- schgc.verdict$verdict
+schgc$FileName2 <- ifelse(is.na(schgc.verdict$sample), schgc$FileName, schgc.verdict$sample)
+schgc$vial2 <- as.integer(str_match(schgc$FileName2, "_V(\\d{1,3})")[,2])
+schgc$dupe2 <- !is.na(schgc$vial2) & schgc$vial2 %in% schgc$vial2[duplicated(schgc$vial2)]
+#schgc.use <- schgc[!(schgc$verdict %in% c("alreadyrun", "empty","leak-blank", "notmine", "notrun", "skip-blank", "skip-notrun")),]
+#match up with metadata
+sampl <-gs_title("Schiedea Volatiles Sampling")
+s <- gs_read(sampl, col_types = cols(.default = col_character(),
+                                     Flow = col_double(),
+                                     Mass = col_double(),
+                                     RunDate = col_date(format = ""),
+                                     SampleDate = col_date(format = ""),
+                                     Start = col_time(format = ""),
+                                     Stop = col_time(format = ""),
+                                     Equi = col_double(),
+                                     Duration = col_double(),
+                                     Total = col_double()
+))
+s.nr <- s[s$GC=="NR",]
+s.nr$Vial <- as.integer(s.nr$Vial)
+sort(union(s.nr$Vial, schgc$vial2))
+sort(setdiff(s.nr$Vial, schgc$vial2)) #not run yet
+sort(setdiff(schgc$vial2, s.nr$Vial)) #run but not entered  
+broken <- c(52,53,56,86,117,124,125,129,174) #broken traps - not run
+empty <- c(7,16,18,28,40,313,314,315,316) # presumed clean - run
+notrun <- c(5,8,21,30,33,50,51,55,57,64,66,74,75,80,81,82,83,84,88,89,91,95,100,102,103,104,107,108,109,11,12,22,23,24,25,26,58,59,60,61,62,63,58,92,94,96,97,98,9, 90, 79, 87, 72, 99)
+setdiff(setdiff(setdiff(s.nr$Vial, schgc$vial2), broken), notrun)
+s.nr$DN <- factor(ifelse(s.nr$Start > 16*60*60, "Night", "Day"))
+#s.nr$FileName <- schgc$FileName2[match(s.nr$Vial, schgc$vial2)]
+sv.all <- merge(s.nr, schgc, by.x = "Vial", by.y="vial2", all.x = T, all.y = T)
+write.csv(sv.all, "s.nr.schgc190815.csv")
+##########################
+
 #sch.data <- read.shimadzu("schiedea190801.txt")
 #sch.data2 <- read.shimadzu("Schiedea_190814.txt")
 #sch.data <- rbind(sch.data, sch.data2)
