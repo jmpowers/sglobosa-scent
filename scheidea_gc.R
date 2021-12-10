@@ -1,140 +1,139 @@
+library(tidyverse)
 library(reshape2)
 library(lubridate)
-library(hms)
-library(tidyr)
-library(readr)
-library(dplyr)
+#library(hms)
 library(vegan)
-library(ggplot2)
+library(ggvegan)
 library(viridis)
 range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 
-setwd("~/MyDocs/MEGA/UCI/Schiedea/Analysis/scent/rmbl/Schiedea")
+setwd("~/MyDocs/MEGA/UCI/Schiedea/Analysis/scent/rmbl/Schiedea/sglobosa-scent")
 source("../read_shimadzu.R")
 
-# Schiedea runs -----------------------------------------------------------
-#Section moved from  ../Inventory/markes_sequence.R, needs to be integrated with rest
-Powers <- grepl("Powers RMBL Data", sequ.summary$FullName, fixed=T)
-schiedea.ids <- sequ.summary %>% filter(Powers) %>% select(id) %>% unique %>% na.omit
-schgc <- sequ.summary %>% filter(id %in% schiedea.ids$id | Powers)
-schgc$vial <- as.integer(str_match(schgc$FileName, "_V(\\d{1,3})")[,2])
-schgc$dupe <- !is.na(schgc$vial) & schgc$vial %in% schgc$vial[duplicated(schgc$vial)]
-#Run  kmeans first
-schgc <- cbind(schgc, sch.km[,-1])
-rownames(schgc) <- 1:nrow(schgc)
-setwd("../Schiedea")
-notebook <- read.delim("leak_notebook.csv")
-schgc <- cbind(schgc, notebook[match(schgc$vial, as.integer(as.character(notebook$Vial)), incomparables=NA),-4])
-schgc$TubeMatch <- schgc$Tube == schgc$SteelTube
-write.csv(schgc, "schiedea_all190815.csv")
-#read back the verdicts
-rmbl <- gs_title("Schiedea RMBL GC-MS Inventory")
-schgc.verdict <- gs_read(rmbl)
-schgc$verdict <- schgc.verdict$verdict
-schgc$FileName2 <- ifelse(is.na(schgc.verdict$sample), schgc$FileName, schgc.verdict$sample)
-schgc$vial2 <- as.integer(str_match(schgc$FileName2, "_V(\\d{1,3})")[,2])
-schgc$dupe2 <- !is.na(schgc$vial2) & schgc$vial2 %in% schgc$vial2[duplicated(schgc$vial2)]
-#schgc.use <- schgc[!(schgc$verdict %in% c("alreadyrun", "empty","leak-blank", "notmine", "notrun", "skip-blank", "skip-notrun")),]
-#match up with metadata
-sampl <-gs_title("Schiedea Volatiles Sampling")
-s <- gs_read(sampl, col_types = cols(.default = col_character(),
-                                     Flow = col_double(),
-                                     Mass = col_double(),
-                                     RunDate = col_date(format = ""),
-                                     SampleDate = col_date(format = ""),
-                                     Start = col_time(format = ""),
-                                     Stop = col_time(format = ""),
-                                     Equi = col_double(),
-                                     Duration = col_double(),
-                                     Total = col_double()
-))
-s.nr <- s[s$GC=="NR",]
-s.nr$Vial <- as.integer(s.nr$Vial)
-sort(union(s.nr$Vial, schgc$vial2))
-sort(setdiff(s.nr$Vial, schgc$vial2)) #not run yet
-sort(setdiff(schgc$vial2, s.nr$Vial)) #run but not entered  
-broken <- c(52,53,56,86,117,124,125,129,174) #broken traps - not run
-empty <- c(7,16,18,28,40,313,314,315,316) # presumed clean - run
-notrun <- c(5,8,21,30,33,50,51,55,57,64,66,74,75,80,81,82,83,84,88,89,91,95,100,102,103,104,107,108,109,11,12,22,23,24,25,26,58,59,60,61,62,63,58,92,94,96,97,98,9, 90, 79, 87, 72, 99)
-setdiff(setdiff(setdiff(s.nr$Vial, schgc$vial2), broken), notrun)
-s.nr$DN <- factor(ifelse(s.nr$Start > 16*60*60, "Night", "Day"))
-#s.nr$FileName <- schgc$FileName2[match(s.nr$Vial, schgc$vial2)]
-sv.all <- merge(s.nr, schgc, by.x = "Vial", by.y="vial2", all.x = T, all.y = T)
-write.csv(sv.all, "s.nr.schgc190815.csv")
-##########################
+# Read chromatograms ------------------------------------------------------
 
+#reading in the Shimadzu search output is slow, skip it
 #sch.data <- read.shimadzu("schiedea190801.txt")
 #sch.data2 <- read.shimadzu("Schiedea_190814.txt")
 #sch.data <- rbind(sch.data, sch.data2)
 #save(sch.data, file="schiedea_190801_190814.Rdata")
-load("schiedea_190801_190814.Rdata")
+load("./data/schiedea_190801_190814.Rdata")
+
+sch.all <- dcast(sch.data, Filename~Name, sum, value.var="Area")
+rownames(sch.all) <- sch.all[,1]
+sch.all[,1] <- NULL
+sch.cut <- sch.all[,colSums(sch.all)>4e6]#arbitrary cutoff
 
 #which names have which CAS numbers?
 sch.data %>% filter(CAS.. != "0 - 00 - 0", Name!="") %>% group_by(Name) %>% summarize(CAS=first(CAS..)) %>% 
   mutate(CAS = str_remove_all(CAS, fixed(" "))) %>%  write_csv("schiedea_Name_CAS.csv")
 
-sch.all <- dcast(sch.data, Filename~Name, sum, value.var="Area")
-rownames(sch.all) <- sch.all[,1]
-sch.all[,1] <- NULL
-sch.cut <- sch.all[,colSums(sch.all)>4e6]
-rs <- rowSums(sch.cut)
-isblank <- grepl("Blank|Bakeout", rownames(sch.cut))#if original FileName says blank
-
-####NMDS and kmeans######
-nmds.sch.cut <- metaMDS(decostand(sch.cut, "hellinger"), dist="bray", autotransform = FALSE, trymax=5, try=5)
-ordiplot(nmds.sch.cut, type = "n")
-points(nmds.sch.cut, display="sites", col=viridis(200)[round(200*sqrt(rs/max(rs)))], pch=as.integer(isblank)+1)
-
-k <- 30
+# k-means  --------------------------------------------------------------------
+k <- 40
 set.seed(1)
 km <- kmeans(decostand(sch.cut, "log"), k, nstart=3)
 #save(km, file="km30.Rdata")
-kblank <- km$cluster %in% c(28,4,18)
-sch.km <- data.frame(FileName=row.names(sch.cut), nameBlank= isblank, Mixup= isblank!=kblank, kBlank=kblank, Cluster=km$cluster)[match(schgc$FileName, row.names(sch.cut)),]
+
+sch.km <- tibble(FileName=rownames(sch.all)) %>% 
+  mutate(rowSum = rowSums(sch.all),
+         Project = str_extract(FileName, "AMBI|Bakeout|Blank|GLOB|KAHO|SCH|STEL") %>% replace_na("sample"),
+         Type = fct_collapse(Project, blank=c("Blank","Bakeout"), air="AMBI", other_level = "sample"),
+         nameBlank = Type=="blank",
+         runYear = str_extract(FileName, "2018|2019|2020")  %>% factor,
+         Cluster = km$cluster) %>% # Figure out which k-means clusters are the blanks
+  mutate(kBlank = Cluster %in% (count(., nameBlank, Cluster) %>% filter(nameBlank, n>2) %>% pull(Cluster)),
+         Mixup = nameBlank != kBlank)
+
 with(sch.km, table(kBlank, nameBlank))
 
-par(bg="grey40")
-ordiplot(nmds.sch.cut, type = "n",xlim=c(-1.8,2.1),ylim=c(-1.3,1.1))
-text(nmds.sch.cut, display="sites", labels=km$cluster, col=kblank+1,cex=0.5 )
-points(nmds.sch.cut, display="sites", col=ifelse(kblank, "black", rainbow(k)[km$cluster]), pch=as.integer(isblank)+1) #triangle if original FileName says blank
+# Schiedea runs -----------------------------------------------------------
+#Section moved from  ../Inventory/markes_sequence.R, code above that section outputs this Rdata:
+load("./data/markes_sequence.rda")
 
-####CAP - kblanks###
-sch.cap.kblank <- capscale(sch.cut ~ as.factor(kblank), distance="bray", metaMDSdist = F)
-plot(sch.cap.kblank)
-View(sch.cap.kblank$CCA$v)
+Powers <- str_detect(sequ.summary$FullName, "Powers RMBL Data")
+schiedea.batchids <- sequ.summary %>% filter(Powers) %>% select(id) %>% unique() %>% na.omit()
+schgc <- sequ.summary %>% filter(id %in% schiedea.batchids$id | Powers) %>% #get entire batch if it had a sample that matches
+  left_join(sch.km %>% select(FileName, nameBlank, Mixup, kBlank, Cluster)) %>% 
+  left_join(sch.data %>% rename(FileName=Filename) %>% group_by(FileName) %>% tally(name="n_peaks")) %>% 
+  mutate(vial = str_match(FileName, "_V(\\d{1,3})")[,2],
+         dupe = !is.na(vial) & vial %in% vial[duplicated(vial)]) %>% 
+  left_join(read_tsv("./data/leak_notebook.csv"), by=c("vial"="Vial"), na_matches = "never") %>% 
+  mutate(TubeMatch = Tube == SteelTube) %>% 
+  write_csv("./data/schiedea_all190815.csv") %>% #for annotation with verdicts
+  bind_cols(read_csv("./data/Schiedea RMBL GC-MS Inventory - schiedea_all.csv") %>%  #read_sheet("1_rNiQ3IwKIKQhfxZTBJbKU14ed6L1rGQpe7e_ttJl6Y")
+              select(sample, verdict)) %>% #read back the verdicts
+  mutate(FileName2 = ifelse(is.na(sample), FileName, sample), #new filename from verdicts
+         vial2 = as.integer(str_match(FileName2, "_V(\\d{1,3})")[,2]),
+         dupe2 = !is.na(vial2) & vial2 %in% vial2[duplicated(vial2)])
+rownames(schgc) <- 1:nrow(schgc)
+
+#match up with metadata
+s.nr <- read_csv("./data/Schiedea Volatiles Sampling - Samples.csv")%>% 
+  filter(GC=="NR") %>% 
+  mutate(Vial = as.integer(Vial),
+         DN = factor(ifelse(Start > 16*60*60, "Night", "Day")))
+sv.all <- full_join(s.nr, schgc, by=c("Vial"="vial2")) %>% 
+  write_csv("./data/s.nr.schgc190815.csv")
+
+#compare metadata (s.nr) and filenames (schgc)
+sort(union(s.nr$Vial, schgc$vial2))
+sort(setdiff(s.nr$Vial, schgc$vial2)) #not run yet
+sort(setdiff(schgc$vial2, s.nr$Vial)) #run but not entered  
+broken <- c(52,53,56,86,117,124,125,129,174) #broken traps - not run
+empty <- c(7,16,18,28,40,313,314,315,316) # presumed clean - run
+notrun <- c(5,8,21,30,33,50,51,55,57,64,66,74,75,80,81,82,83,84,88,89,91,95,100,102,103,104,107,108,109,
+            11,12,22,23,24,25,26,58,59,60,61,62,63,58,92,94,96,97,98,9, 90, 79, 87, 72, 99)
+setdiff(setdiff(setdiff(s.nr$Vial, schgc$vial2), broken), notrun)
+
+# NMDS of blanks and all samples --------------------------------------------------------------------
+nmds.sch <- metaMDS(decostand(sch.cut, "hellinger"), dist="bray", autotransform = FALSE, trymax=1, try=1)
+nmds.points <- fortify(nmds.sch) %>% as_tibble() %>% 
+  filter(Score=="sites") %>% left_join(sch.km, by=c("Label"="FileName"))
+
+ggplot(nmds.points, aes(x=NMDS1, y=NMDS2, color=log(rowSum))) + 
+  geom_point() + scale_color_viridis_c() + theme_dark()
+
+ggplot(nmds.points, aes(x=NMDS1, y=NMDS2, color=Cluster, shape=Type)) + geom_point() +
+  scale_color_gradientn(colors=turbo(k)) + theme_dark()
+
+ggplot(nmds.points, aes(x=NMDS1, y=NMDS2, color=nameBlank, shape=Type)) + geom_point()
+
+ggplot(nmds.points, aes(x=NMDS1, y=NMDS2, label=Cluster, color=Type)) + geom_text(size=3)
+
+# CAP of blanks vs all samples ---------------------------------------------------------------------
+
+sch.cap.kblank <- capscale(sch.cut ~ kBlank , distance="bray", metaMDSdist = F, data=sch.km)
+sch.cap.kblank.points <-  fortify(sch.cap.kblank) %>% as_tibble() %>% 
+  filter(Score=="sites") %>% left_join(sch.km, by=c("Label"="FileName"))
+ggplot(sch.cap.kblank.points, aes(x=CAP1, y=MDS2, color=nameBlank)) + geom_point()
+enframe(sch.cap.kblank$CCA$v) %>% arrange(value) # volatiles higher in samples compared to blanks
 
 ##### Get metadata ###
-sv <- sv.all[match(rownames(sch.cut), sv.all$FileName), ] ##12/3/2020: changed from Fileame2 (renamed) to FileName (original)
-sv$badtube <- as.factor(sv$verdict) %in% c("alreadyrun", "empty","leak-blank", "notmine", "notrun", "skip-blank", "skip-notrun","check-chrom","trapblank")
-sv$type <- ifelse(grepl("Blank|Bakeout", sv$FileName2),"blank", ifelse(sv$Species=="ambient", "ambient", "floral"))
-sv$type[is.na(sv$type)] <- "other"
-sv$type <- as.factor(sv$type)
-sv$Species[sv$type=="blank"] <- "blank"
-sv$Species <- as.factor(sv$Species)
-sv$Population <- as.factor(sv$Population)
-sv$Plant <- as.factor(sv$Plant)
-sv$Cutting <- as.factor(sv$Cutting)
-sv$Sex <- as.factor(sv$Sex)
-sv$sp <- factor(toupper(substr(as.character(sv$Species), 1, 4)))
+sv.full <- data.frame(FileName = rownames(sch.cut)) %>%  ##2020-12-03: changed from FileName2 (renamed) to FileName (original)
+  left_join(sv.all) %>% #TODO adds two rows,  must be duplicates!!
+  mutate(badtube = verdict %in% c("alreadyrun", "empty","leak-blank", "notmine", "notrun", "skip-blank", "skip-notrun","check-chrom","trapblank"),
+         type = ifelse(str_detect(FileName2, "Blank|Bakeout") ,"blank", ifelse(Species=="ambient", "ambient", "floral")) %>% replace_na("other"),
+         Species = ifelse(type=="blank", "blank", Species),
+         sp = toupper(substr(Species, 1, 4)),
+         across(c(type, Species, Population, Plant, Cutting, Sex, sp), factor),
+         duped = duplicated(FileName))
 
-ordiplot(nmds.sch.cut, type = "n",xlim=c(-1.8,2.1),ylim=c(-1.3,1.1))
-points(nmds.sch.cut, display="sites",col=as.integer(sv$type), pch=1+sv$badtube)
-text(nmds.sch.cut, display="sites", labels=as.character(km$cluster), col=as.integer(sv$type)+2*sv$badtube) #shows remaining inconsistencies for nmds above
+ggplot(left_join(nmds.points,sv.full), aes(x=NMDS1, y=NMDS2, color=type, shape=badtube)) + geom_point()
+ggplot(left_join(nmds.points,sv.full), aes(x=NMDS1, y=NMDS2, label=Cluster, color=paste(type,badtube))) + geom_text(size=3) #shows remaining inconsistencies
 
-sch.cut2 <- sch.cut[!sv$badtube & sv$type !="other",]
-sv <- sv[!sv$badtube & sv$type !="other",]
-sv$type <- droplevels(sv$type)
-sv$sp2 <- replace(sv$sp, sv$Population == "KK", "KAAL"); sv$sp2 <- droplevels(replace(sv$sp2, sv$Population == "HH", "HOOK"))
-sv$Species2 <- replace(sv$Species, sv$Population == "KK", "kaalae"); sv$Species2 <- replace(sv$Species2, sv$Population == "HH", "hookeri")
-sv$Species2Pop <- as.factor(paste(sv$Species2, sv$Population))
+sch.cut2 <- sch.cut[!sv.full$badtube & sv.full$type !="other",]
+sv <- sv.full %>% filter(!badtube & type !="other") %>% 
+  mutate(type = fct_drop(type),
+         sp2 = sp %>% replace(Population == "KK", "KAAL") %>% replace(Population == "HH", "HOOK") %>% droplevels(),
+         Species2 = Species %>% replace(Population == "KK", "kaalae") %>% replace(Population == "HH", "hookeri"),
+         Species2Pop = factor(paste(Species2, Population))) %>% 
+  write_csv("./data/sv_190815_fixed.csv")
 
+# Inventory
 with(sv, table(kBlank, type))
 with(sv, table(Species2, DN))
 with(sv, table(Species2Pop, DN))
 with(sv, table(Species2Pop, paste(Sex,DN)))
-write.csv(sv, "sv_190815_fixed.csv")
-#sv$Mixup2 <- with(sv,(kBlank & type != "blank") | (!kBlank & type=="blank"))
-#write.csv(sv[!is.na(sv$Mixup2) & sv$Mixup2==TRUE,], "mixup2.csv")
 
 ##NMDS with metadata###
 library(ggthemes)
