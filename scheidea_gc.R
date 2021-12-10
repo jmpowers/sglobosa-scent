@@ -1,7 +1,7 @@
 library(tidyverse)
 library(reshape2)
 library(lubridate)
-#library(hms)
+library(hms)
 library(vegan)
 library(ggvegan)
 library(viridis)
@@ -108,9 +108,10 @@ sch.cap.kblank.points <-  fortify(sch.cap.kblank) %>% as_tibble() %>%
 ggplot(sch.cap.kblank.points, aes(x=CAP1, y=MDS2, color=nameBlank)) + geom_point()
 enframe(sch.cap.kblank$CCA$v) %>% arrange(value) # volatiles higher in samples compared to blanks
 
-##### Get metadata ###
-sv.full <- data.frame(FileName = rownames(sch.cut)) %>%  ##2020-12-03: changed from FileName2 (renamed) to FileName (original)
-  left_join(sv.all) %>% #TODO adds two rows,  must be duplicates!!
+
+# Get metadata -----------------------------------------------------------------------
+sv.full <- tibble(FileName = rownames(sch.cut)) %>%  ##2020-12-03: changed from FileName2 (renamed) to FileName (original)
+  left_join(distinct(sv.all, FileName, .keep_all=T)) %>% #TODO adds two rows - a duplicate blank and a vial contaminated with two samples
   mutate(badtube = verdict %in% c("alreadyrun", "empty","leak-blank", "notmine", "notrun", "skip-blank", "skip-notrun","check-chrom","trapblank"),
          type = ifelse(str_detect(FileName2, "Blank|Bakeout") ,"blank", ifelse(Species=="ambient", "ambient", "floral")) %>% replace_na("other"),
          Species = ifelse(type=="blank", "blank", Species),
@@ -126,8 +127,8 @@ sv <- sv.full %>% filter(!badtube & type !="other") %>%
   mutate(type = fct_drop(type),
          sp2 = sp %>% replace(Population == "KK", "KAAL") %>% replace(Population == "HH", "HOOK") %>% droplevels(),
          Species2 = Species %>% replace(Population == "KK", "kaalae") %>% replace(Population == "HH", "hookeri"),
-         Species2Pop = factor(paste(Species2, Population))) %>% 
-  write_csv("./data/sv_190815_fixed.csv")
+         Species2Pop = factor(paste(Species2, Population))) #%>% 
+  #write_csv("./data/sv_190815_fixed.csv")
 
 # Inventory
 with(sv, table(kBlank, type))
@@ -135,9 +136,7 @@ with(sv, table(Species2, DN))
 with(sv, table(Species2Pop, DN))
 with(sv, table(Species2Pop, paste(Sex,DN)))
 
-##NMDS with metadata###
-library(ggthemes)
-#spcol <- c(gdocs_pal()(10), alpha(gdocs_pal()(10), 0.8), alpha(gdocs_pal()(10), 0.5))
+# NMDS with metadata -----------------------------------------------------------------------
 spcol <- unique(c('#3366cc', '#dc3912', '#ff9900', '#109618', '#990099', '#0099c6', '#dd4477', '#66aa00', '#b82e2e', '#316395', '#994499', '#22aa99', '#aaaa11', '#6633cc', '#e67300', '#8b0707', '#651067', '#329262', '#5574a6', '#3b3eac', '#b77322', '#16d620', '#b91383', '#f4359e', '#9c5935', '#a9c413', '#2a778d', '#668d1c', '#bea413', '#0c5922', '#743411', '#3366cc'))
 
 set.seed(1)
@@ -149,16 +148,16 @@ ordiellipse(nmds.sch.cut2, sv$type, col=spcol, lwd=4)
 legend("topleft", levels(sv$Species), fill=spcol, cex=0.7)
 identify(nmds.sch.cut2.plot, what="sites", labels=rownames(sch.cut2), cex=0.7)
 
-##CAP - species##
+# CAP - species ---------------------------------------------------------------------
 sch.cap <- capscale(sqrt(sch.cut2) ~ sv$Species, distance="bray", metaMDSdist = F)
 sch.cap.plot <- plot(sch.cap, type="n")
 points(sch.cap, display="sites", col=spcol[as.integer(sv$Species)], pch=as.integer(sv$type)) #pch=as.integer(sv$DN)+15
 ordiellipse(sch.cap, na.omit(sv$Species), col=spcol, lwd=4)
 legend("topleft", levels(sv$Species), fill=spcol, cex=0.7)
 identify(sch.cap.plot, what="sites", labels=rownames(sch.cut2[!is.na(sv$Species),]), cex=0.7)
-View(sch.cap$CCA$v)
+#View(sch.cap$CCA$v)
 
-####Filtering######
+# Filtering ---------------------------------------------------------------
 library(bouquet)
 sch.data.cut2 <- sch.data[sch.data$Filename %in% sv$FileName,]
 sch.data.cut2$Filename <- sv$FileName2[match(sch.data.cut2$Filename, sv$FileName)]
@@ -178,53 +177,63 @@ chemsf <- filter_RT(chems, 2, 17) %>%
   combine_filters() 
 chemsf$filter_final <- with(chemsf, filter_RT == "OK" & filter_ambient_ratio == "OK" & filters_passed > 5 & filter_contaminant == "OK")# &(freq.kaalae > 0.1 | freq.hookeri > 0.1 |freq.kaho > 0.1))
 lapply(chemsf[grepl("filter", names(chemsf))], table)
-write.csv(chemsf, "chemsf_190815_kaho_fixed.csv")
+#write.csv(chemsf, "./data/chemsf_190815_kaho_fixed.csv")
 
 vol <-prune_sampletable(vol.all, chemsf, metadata)
 
 #save.image("sch_workspace190815_fixed.Rdata")
-load("sch_workspace190815_fixed.Rdata")
+load("../sch_workspace190815_fixed.Rdata")
 
-svf <- metadata[metadata$type == "floral",]
-svf$sp2 <- droplevels(svf$sp2)
-svf$SampleDate <- svf$date
-svf$Flrs <- as.integer(svf$amount)
-ints <- c("Page","Sample","Leaves", "Inflor", "Mphase", "Fphase", "Closed", "Buds", "amount", "Flrs", "ClosedCN","BudsCN","FlrsCN","Temp")
-svf[,ints] <- lapply(svf[,ints], as.integer)
-svf<- mutate_if(svf, is.character, as.factor)
-str(svf)
+# Finish metadata ---------------------------------------------------------
+
+svf <- metadata %>% filter(type == "floral") %>% 
+  mutate(sp2 = droplevels(sp2), SampleDate = date, Flrs = amount,
+         across(c(Page,Sample,Leaves,Inflor,Mphase,Fphase,Closed,Buds,amount,Flrs,ClosedCN,BudsCN,FlrsCN,Temp), as.integer),
+         across(where(is.character), factor),
+         across(where(is.difftime), as_hms))
+
+# final tweaks to metadata
+
+# Wrong year on this sampledate
+svf[as.character(svf$SampleDate)=="2019-08-01","SampleDate"] <- svf[as.character(svf$SampleDate)=="2019-08-01","SampleDate"] - 365
+
+# Due to a labelling mistake in the greenhouse, 906 24-2 is actually 905 24-2 
+svf$Population[svf$Population=="906" & svf$Plant=="24-2"] <- "905"
+
+# Therefore the plants labelled "906 16-3 x 24-2" are actually interisland hybrids, "906 16-3 x 905 24-2"
+plants_exclude <- str_detect(svf$Plant, "16-3 x 24-2") %>% replace_na(FALSE)
 
 #Vial 526 fell on floor
 vials_exclude <- c(526)
-vol <- vol[!(svf$Vial %in% vials_exclude),]
-svf <- svf[!(svf$Vial %in% vials_exclude),]
 
-###add sunset times to metadata
+samples_exclude <- (svf$Vial %in% vials_exclude) | plants_exclude
+vol <- vol[!samples_exclude,]; svf <- svf[!samples_exclude,]
+
+
+#  add sunset times in the greenhouse
 add.sunset <- function(s) {
-library(maptools)
-s$SampleDateStart <- paste(s$SampleDate, s$Start)
-is.na(s$SampleDateStart) <- (is.na(s$SampleDate) + is.na(s$Start))>0
-s$SampleDateStart <- as.POSIXct(s$SampleDateStart)
-s$SampleDateStop <- paste(s$SampleDate, s$Stop)
-is.na(s$SampleDateStop) <- (is.na(s$SampleDate) + is.na(s$Stop))>0
-s$SampleDateStop <- as.POSIXct(s$SampleDateStop)
-
-greenhouse <- matrix(c(-117.8475746, 33.6472914), nrow=1)
-sunsets <- do.call("c", lapply(lapply(s$SampleDateStart, sunriset, crds=greenhouse, direction="sunset", POSIXct.out=T), function(x) x$time))
-s$StartSunset <- difftime(s$SampleDateStart, sunsets,units="hours")
-s$StopSunset <- difftime(s$SampleDateStop,sunsets,units="hours")
-solarnoons <- do.call("c", lapply(lapply(s$SampleDateStart, solarnoon, crds=greenhouse, POSIXct.out=T), function(x) x$time))
-s$StartNoon <- difftime(s$SampleDateStart,solarnoons,units="hours")
-return(s)
+  library(maptools)
+  s$SampleDateStart <- paste(s$SampleDate, s$Start)
+  is.na(s$SampleDateStart) <- (is.na(s$SampleDate) + is.na(s$Start))>0
+  s$SampleDateStart <- as.POSIXct(s$SampleDateStart)
+  s$SampleDateStop <- paste(s$SampleDate, s$Stop)
+  is.na(s$SampleDateStop) <- (is.na(s$SampleDate) + is.na(s$Stop))>0
+  s$SampleDateStop <- as.POSIXct(s$SampleDateStop)
+  
+  greenhouse <- matrix(c(-117.8475746, 33.6472914), nrow=1)
+  sunsets <- do.call("c", lapply(lapply(s$SampleDateStart, sunriset, crds=greenhouse, direction="sunset", POSIXct.out=T), function(x) x$time))
+  s$StartSunset <- difftime(s$SampleDateStart, sunsets,units="hours")
+  s$StopSunset <- difftime(s$SampleDateStop,sunsets,units="hours")
+  solarnoons <- do.call("c", lapply(lapply(s$SampleDateStart, solarnoon, crds=greenhouse, POSIXct.out=T), function(x) x$time))
+  s$StartNoon <- difftime(s$SampleDateStart,solarnoons,units="hours")
+  return(s)
 }
-library(hms)
-svf <- mutate_if(svf, is.difftime, as.hms)
-svf[as.character(svf$SampleDate)=="2019-08-01","SampleDate"]<-svf[as.character(svf$SampleDate)=="2019-08-01","SampleDate"]-365#wrong year
 svf <- add.sunset(svf)
+                
+save(svf, vol, file="./data/svf_vol.Rdata")
 
-save(svf, vol, file="svf_vol.Rdata")
 
-#####Table of volatiles###
+# Table of volatiles ------------------------------------------------------
 add_counts_freqs <- function(chemtable, sampletable, groups) {
   for (g in levels(groups)[levels(groups) != ""]) {
     chemtable[, paste0("count.", g)] <- sapply(na.omit(sampletable[groups == 
@@ -235,9 +244,11 @@ add_counts_freqs <- function(chemtable, sampletable, groups) {
   return(chemtable)
 }
 metadata$sp2_DN <- factor(with(metadata, paste(sp2, DN, sep=".")))
-chemsdn <- add_counts_freqs(chemsf, vol.all, metadata$sp2_DN)
-write.csv(chemsdn, "chemsdn_190815_fixed.csv")
+chemsdn <- add_counts_freqs(chemsf, vol.all, metadata$sp2_DN) %>% 
+  write.csv("./data/chemsdn_190815_fixed.csv")
 
+
+# Ordinations of filtered table -------------------------------------------
 
 ###NMDS of filtered table####
 set.seed(1)
