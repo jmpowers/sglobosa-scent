@@ -7,8 +7,8 @@ library(ggvegan)
 library(viridis)
 range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 
-setwd("~/MyDocs/MEGA/UCI/Schiedea/Analysis/scent/rmbl/Schiedea/sglobosa-scent")
-source("../read_shimadzu.R")
+#setwd("~/MyDocs/MEGA/UCI/Schiedea/Analysis/scent/rmbl/Schiedea/sglobosa-scent")
+source("./read_shimadzu.R")
 
 # Read chromatograms ------------------------------------------------------
 
@@ -197,8 +197,16 @@ svf <- metadata %>% filter(type == "floral") %>%
 # Wrong year on this sampledate
 svf[as.character(svf$SampleDate)=="2019-08-01","SampleDate"] <- svf[as.character(svf$SampleDate)=="2019-08-01","SampleDate"] - 365
 
+# Inventory says "Genotype 6 Cutting 2 F" and all other cuttings are labelled female - change sex from M to F to match.
+svf$Sex[svf$Population=="13886" & svf$Plant=="6F"] <- "F"
+
+#All the 10228 plants have a three-digit number, so merge 12 and 012
+svf$Plant[svf$Population=="10228" & svf$Plant=="12"] <- "012"
+
 # Due to a labelling mistake in the greenhouse, 906 24-2 is actually 905 24-2 
 svf$Population[svf$Population=="906" & svf$Plant=="24-2"] <- "905"
+#Change label of 905 98s 24-2M to merge its genotype with the above
+svf$Plant[svf$Population=="905" & svf$Plant=="98s 24-2M"] <- "24-2"
 
 # Therefore the plants labelled "906 16-3 x 24-2" are actually interisland hybrids, "906 16-3 x 905 24-2"
 plants_exclude <- str_detect(svf$Plant, "16-3 x 24-2") %>% replace_na(FALSE)
@@ -244,8 +252,8 @@ add_counts_freqs <- function(chemtable, sampletable, groups) {
   return(chemtable)
 }
 metadata$sp2_DN <- factor(with(metadata, paste(sp2, DN, sep=".")))
-chemsdn <- add_counts_freqs(chemsf, vol.all, metadata$sp2_DN) %>% 
-  write.csv("./data/chemsdn_190815_fixed.csv")
+chemsdn <- add_counts_freqs(chemsf, vol.all, metadata$sp2_DN) #%>% 
+  #write_csv("./data/chemsdn_190815_fixed.csv")
 
 
 # Ordinations of filtered table -------------------------------------------
