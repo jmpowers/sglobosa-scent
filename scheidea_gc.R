@@ -5,7 +5,6 @@ library(hms)
 library(vegan)
 library(ggvegan)
 library(viridis)
-range01 <- function(x){(x-min(x))/(max(x)-min(x))}
 
 #setwd("~/MyDocs/MEGA/UCI/Schiedea/Analysis/scent/rmbl/Schiedea/sglobosa-scent")
 source("./read_shimadzu.R")
@@ -26,7 +25,7 @@ sch.cut <- sch.all[,colSums(sch.all)>4e6]#arbitrary cutoff
 
 #which names have which CAS numbers?
 sch.data %>% filter(CAS.. != "0 - 00 - 0", Name!="") %>% group_by(Name) %>% summarize(CAS=first(CAS..)) %>% 
-  mutate(CAS = str_remove_all(CAS, fixed(" "))) %>%  write_csv("schiedea_Name_CAS.csv")
+  mutate(CAS = str_remove_all(CAS, fixed(" "))) %>%  write_csv("./data/schiedea_Name_CAS.csv")
 
 # k-means  --------------------------------------------------------------------
 k <- 40
@@ -182,41 +181,28 @@ lapply(chemsf[grepl("filter", names(chemsf))], table)
 vol <-prune_sampletable(vol.all, chemsf, metadata)
 
 #save.image("sch_workspace190815_fixed.Rdata")
-load("../sch_workspace190815_fixed.Rdata")
 
 # Finish metadata ---------------------------------------------------------
+#Only need to run this section to get final vol matrix and svf metadata
+
+# 2021-12-12 discovered that vol and svf from Schiedea/schiedea_gc_20200205.Rdata and Schiedea/svf_vol.Rdata are not lined up 
+# (the latter was used for globosa.Rmd analyses until now)
+# because V529 is missing from vol, which normally follows V526 (excluded in code because it fell on the floor).
+# Potentially vol <- vol[!(svf$Vial %in% vials_exclude),] was run twice, which deletes the V529 row at the position of V526.
+# Scheidea/sch_workspace190815_fixed.Rdata", listed in all versions of scheidea_gc.R, has vol lined up correctly but 
+# includes V526, needs to be excluded by running below code.
+# for diagnosing this:
+# tibble(svf.vial=svf$Vial, svf.fn=svf$FileName, svf.sa=svf$sample, 
+# vol.rn=rownames(vol), vol.ac=vol$Acetoin, 
+# match=as.integer(svf.fn==vol.rn), match.sa=as.integer(svf.sa==vol.rn)) %>% clipr::write_clip()
+
+load("../sch_workspace190815_fixed.Rdata")
 
 svf <- metadata %>% filter(type == "floral") %>% 
   mutate(sp2 = droplevels(sp2), SampleDate = date, Flrs = amount,
          across(c(Page,Sample,Leaves,Inflor,Mphase,Fphase,Closed,Buds,amount,Flrs,ClosedCN,BudsCN,FlrsCN,Temp), as.integer),
          across(where(is.character), factor),
          across(where(is.difftime), as_hms))
-
-# final tweaks to metadata
-
-# Wrong year on this sampledate
-svf[as.character(svf$SampleDate)=="2019-08-01","SampleDate"] <- svf[as.character(svf$SampleDate)=="2019-08-01","SampleDate"] - 365
-
-# Inventory says "Genotype 6 Cutting 2 F" and all other cuttings are labelled female - change sex from M to F to match.
-svf$Sex[svf$Population=="13886" & svf$Plant=="6F"] <- "F"
-
-#All the 10228 plants have a three-digit number, so merge 12 and 012
-svf$Plant[svf$Population=="10228" & svf$Plant=="12"] <- "012"
-
-# Due to a labelling mistake in the greenhouse, 906 24-2 is actually 905 24-2 
-svf$Population[svf$Population=="906" & svf$Plant=="24-2"] <- "905"
-#Change label of 905 98s 24-2M to merge its genotype with the above
-svf$Plant[svf$Population=="905" & svf$Plant=="98s 24-2M"] <- "24-2"
-
-# Therefore the plants labelled "906 16-3 x 24-2" are actually interisland hybrids, "906 16-3 x 905 24-2"
-plants_exclude <- str_detect(svf$Plant, "16-3 x 24-2") %>% replace_na(FALSE)
-
-#Vial 526 fell on floor
-vials_exclude <- c(526)
-
-samples_exclude <- (svf$Vial %in% vials_exclude) | plants_exclude
-vol <- vol[!samples_exclude,]; svf <- svf[!samples_exclude,]
-
 
 #  add sunset times in the greenhouse
 add.sunset <- function(s) {
@@ -236,8 +222,34 @@ add.sunset <- function(s) {
   s$StartNoon <- difftime(s$SampleDateStart,solarnoons,units="hours")
   return(s)
 }
+# Wrong year on this sampledate
+svf[as.character(svf$SampleDate)=="2019-08-01","SampleDate"] <- svf[as.character(svf$SampleDate)=="2019-08-01","SampleDate"] - 365
+
 svf <- add.sunset(svf)
-                
+
+# final tweaks to metadata
+
+# Inventory says "Genotype 6 Cutting 2 F" and all other cuttings are labelled female - change sex from M to F to match.
+svf$Sex[svf$Population=="13886" & svf$Plant=="6F"] <- "F"
+
+#All the 10228 plants have a three-digit number, so merge 12 and 012
+svf$Plant[svf$Population=="10228" & svf$Plant=="12"] <- "012"
+
+# Due to a labelling mistake in the greenhouse, 906 24-2 is actually 905 24-2 
+svf$Population[svf$Population=="906" & svf$Plant=="24-2"] <- "905"
+#Change label of 905 98s 24-2M to merge its genotype with the above
+svf$Plant[svf$Population=="905" & svf$Plant=="98s 24-2M"] <- "24-2"
+
+# Therefore the plants labelled "906 16-3 x 24-2" are actually interisland hybrids, "906 16-3 x 905 24-2"
+plants_exclude <- str_detect(svf$Plant, "16-3 x 24-2") %>% replace_na(FALSE)
+
+#Vial 526 fell on floor
+vials_exclude <- c(526)
+
+samples_exclude <- (svf$Vial %in% vials_exclude) | plants_exclude #total of 7 samples to exclude
+#View(svf[samples_exclude,])
+vol <- vol[!samples_exclude,]; svf <- svf[!samples_exclude,] #only run this line once! Don't store it and run it again.
+
 save(svf, vol, file="./data/svf_vol.Rdata")
 
 
