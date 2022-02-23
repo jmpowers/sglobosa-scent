@@ -253,6 +253,33 @@ vol <- vol[!samples_exclude,]; svf <- svf[!samples_exclude,] #only run this line
 save(svf, vol, file="./data/svf_vol.Rdata")
 
 
+# S. globosa data only ----------------------------------------------------
+
+library(tidyverse)
+library(vegan)
+load("./data/svf_vol.Rdata") # lined up, unlike Schiedea/svf_vol.Rdata
+svglob <-   svf[svf$sp=="GLOB",]
+vol.glob <- vol[svf$sp=="GLOB",]
+
+#table of calibration standards and slopes (area/ng) to use for each type/subtype of compound
+standards <- left_join(read_csv("./data/glob_chemtypes.csv"), 
+                       read_csv("./data/regressions_2019_prexfer_filtered_slopes.csv"))
+
+#get short names for compounds
+chems.glob <- data.frame(name=colnames(vol.glob), mean=colMeans(vol.glob), freq.glob=colMeans(decostand(vol.glob, "pa")), row.names=NULL) #%>% write_csv("./output/glob_chemnames.csv")
+chems.glob2 <- read.csv("./data/glob_chemnames - shortnames.csv", stringsAsFactors = F) %>% mutate(name3=ifelse(name2=="",ifelse(IUPAC=="",name,IUPAC), name2), name4=make.unique(name3)) %>% 
+  left_join(standards)
+chems.glob2$name4[131] <- "linalool oxide (furanoid)"
+chems.glob2$name4[184] <- "linalool oxide (furanoid).1"
+chems.glob2$name4[36]  <- "linalool oxide (furanoid).2"
+
+colnames(vol.glob)  <- chems.glob2$name4
+vol.glob <- sweep(vol.glob, 2, chems.glob2$area_per_ng, FUN = '/')  # convert areas to nanograms 
+vol.glob <- vol.glob[, colSums(vol.glob)>0 & chems.glob2$IUPAC != ""]#filter zeros and above 3% of samples (chems with names looked up)
+vol.glob <- vol.glob / svglob$Total #divide by equilibration + pumping time
+fvol.glob <- vol.glob / sqrt(as.integer(svglob$Flrs))
+save(chems.glob2, vol.glob, fvol.glob, svglob, file="./data/vol_glob.rda") #just the S. globosa data for analysis
+
 # Table of volatiles ------------------------------------------------------
 add_counts_freqs <- function(chemtable, sampletable, groups) {
   for (g in levels(groups)[levels(groups) != ""]) {
