@@ -6,7 +6,7 @@ output:
   html_document:
     self_contained: no
     lib_dir: libs
-    code_folding: show
+    code_folding: hide
     toc: yes
     toc_float: TRUE 
 editor_options: 
@@ -45,9 +45,12 @@ library(pheatmap)
 library(colortools)
 library(gridExtra)
 library(ggrepel)
-if(!exists("params")) params <- list(year = 2019)
-knitr::opts_chunk$set(comment="", cache=T, warning = F, message = F, fig.path = paste0("figures",params$year,"/"), dev="svglite")
-options(digits=4) # for kables
+if(!exists("params")) params <- list(year = 2019) # dynamic from knitr params specified in header or graphically
+knitr::opts_chunk$set(comment="", cache=T, warning = F, message = F, 
+                      fig.path = paste0("figures",params$year,"/"), dev="svglite", dev.args=list(fix_text_size=FALSE),
+                      fig.width=7, fig.height=6)
+ftot.plot.dims <- list(`2018`=c(3,5), `2019`=c(6,7))[[as.character(params$year)]]
+options(digits=4, knitr.kable.NA = "") # for kables
 signif.num <- function(x) {
     symnum(x, corr = FALSE, na = FALSE, legend = FALSE,
            cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1), 
@@ -94,14 +97,31 @@ glob.pops <- pops[glob.pops.WtoE,]
 svglob$Island <- factor(svglob$Island, levels=c("Oahu","Molokai","Maui","Hawaii"))
 levels(svglob$Island) <- c("O'ahu","Moloka'i","Maui","Hawai'i")
 svglob$Population <- factor(svglob$Population, levels=glob.pops.WtoE)#new, for inventory
+
+#Table of volatiles
+chemsf <- read_csv("./data/chemsf_190815_kaho_fixed.csv")
+load("./data/get_kovats.rda") # from alkane ladders
+#just look for alkanes in unfiltered sample data with often bad IDs! (better to use ladder)
+alkanes <- read_csv("./data/alkanes.csv") %>% left_join(chemsf %>% select(-starts_with(c("count","freq")))) %>% 
+  filter(!n %in% c(11,13,15,16,24)) %>% drop_na(RT) #don't fit curve
+
+fvol.glob.mean <- fvol.glob %>% mutate(Sex=svglob$Sex, DN=svglob$DN) %>% group_by(Sex, DN) %>% summarize_all(mean) %>% as.data.frame
+rownames(fvol.glob.mean) <- with(fvol.glob.mean, paste(Sex, DN))
+fvol.glob.mean <- fvol.glob.mean %>% select(-c("Sex","DN")) %>% t %>% as.data.frame %>% tibble::rownames_to_column("name") %>% 
+  left_join(chems.glob2, by=c(name="name4")) %>% mutate(type=factor(type)) %>% 
+  left_join(chemsf %>% select(name.y=name, RT)) %>%  # add retention times
+  mutate(RI = get_kovats(RT)) %>%  #get Kovats retention index from alkane ladders on this GC
+  left_join(read_csv("./data/schiedea_Name_CAS.csv") %>% rename(name.y=Name))
 ```
 
 # Inventory of all years
 
 ```{r inventory}
 #Samples
-with(svglob, table(DN,Year))
-with(svglob, table( paste(Sex, DN), Year))
+#svglob %>% count(DN,Year) %>% pivot_wider(names_from=Year, values_from=n) %>% 
+#  kable(caption="Samples by year and time")
+#svglob %>% count(Sex, DN,Year) %>% pivot_wider(names_from=Year, values_from=n, values_fill=0) %>%
+#  kable(caption="Samples by year, sex, and time")
 sample_tally <- svglob %>% filter((Year=="2018" & DN=="Day") | (Year=="2019" & DN=="Night")) %>% 
   count(Year, Island, Population, Sex) %>% 
   pivot_wider(names_from=Sex, names_sort=T, values_from=n, values_fill=0)
@@ -109,15 +129,11 @@ sample_tally <- svglob %>% filter((Year=="2018" & DN=="Day") | (Year=="2019" & D
 svglob.unique <- svglob %>% 
   dplyr::select(Species, Island, Population, Family, Plant, Sex, Cutting, Year) %>% 
   distinct() %>% #drop DN and Sample and date to collapse day/night pairs and resamples #drop Cutting and PlantDate to get unique genotypes
-  arrange(Species, Island, Population, Plant, Sex, Year) %>% 
-  write_csv("./output_cut/unique_plants.csv")
+  arrange(Species, Island, Population, Plant, Sex, Year)
+#svglob.unique %>% kable(caption="Plants in this study")
 
-#which plants were measured in both years?
-svglob.unique %>% count(Population, Plant, Sex, Cutting) %>% arrange(n)
-
-#Plants
-with(svglob.unique, table(paste(Island, Population), Sex, Year))
-with(svglob.unique, table(Year))
+svglob.unique %>% count(Population, Plant, Sex, Cutting) %>% count(n, name="years_measured") %>% 
+  kable(caption="How many plants were measured in both years?")
 
 #Genotypes
 svglob.geno <- svglob %>% 
@@ -125,50 +141,42 @@ svglob.geno <- svglob %>%
   distinct() %>% #drop DN and Sample and date to collapse day/night pairs and resamples #drop Cutting and PlantDate to get unique genotypes
   arrange(Species, Island, Population, Plant, Sex, Year)
 #with(svglob.geno, table(paste(Island, Population), Sex, Year))
-with(svglob.geno, table(Year))
+#svglob.geno %>% count(Year) %>% kable(caption = "Genotypes by year")
 genotype_tally <- svglob.geno %>%  
   count(Year, Island, Population, Sex) %>% 
   pivot_wider(names_from=Sex, names_sort=T, values_from=n, values_fill=0)
 
-bind_rows(sample=sample_tally, genotype=genotype_tally, .id="count") %>% 
-  pivot_wider(names_from = "count", values_from = c("F", "H", "M")) %>% 
-  write_csv("./output_cut/AppendixS1_S3_inventory.csv")
-
-#Families#
-svglob.family <- svglob %>% 
-  dplyr::select(Species, Island, Population, Family, Sex, Year) %>% 
-  distinct() %>% #also drop Plant and replace with Family to get unique lineages
-  arrange(Species, Island, Population, Family, Sex, Year)
-
-with(svglob.family, table(paste(Island, Population), Sex, Year))
-with(svglob.family, table(Year))
-
-#selection of plants of each sex did not depend on date
-chisq.test(with(svglob, table(SampleDate, Sex)))
+with(svglob, table(SampleDate, Sex)) %>% chisq.test() %>% tidy() %>% 
+  kable(caption = "Selection of plants of each sex did not depend on date")
 ```
 
-# Flower number effects
+## Appendix S1 and S3: Inventory
+
+```{r inventory2}
+bind_rows(sample=sample_tally, genotype=genotype_tally, .id="count") %>% 
+  pivot_wider(names_from = "count", values_from = c("F", "H", "M")) %>% 
+  kable(caption = paste0("Samples and genotypes by year, population, and sex"))
+```
+
+# Scent vs. infloresence age
 
 ```{r flowers}
 #Scent composition ~ open flowers
-cap.glob.flrs <- capscale(decostand(vol.glob, "tot") ~ Year+DN+Sex+Flrs, data=svglob, distance="bray", metaMDSdist = F)
-anova(cap.glob.flrs, by="term")
+capscale(decostand(vol.glob, "tot") ~ Year+DN+Sex+Flrs, data=svglob, distance="bray", metaMDSdist = F) %>% 
+  anova(by="term") %>% tidy() %>% kable(caption = "CAP of scent composition vs. number of flowers")
 
   #Scent compostion ~ inflo age
 svglob$Age <- with(svglob, Closed/(Closed+Flrs))
-cap.glob.flr <- capscale(decostand(vol.glob, "tot") ~ Year+DN+Sex+Age, data=svglob, distance="bray", metaMDSdist = F)
-anova(cap.glob.flr, by="term")
-cap.glob.flr
+capscale(decostand(vol.glob, "tot") ~ Year+DN+Sex+Age, data=svglob, distance="bray", metaMDSdist = F) %>% 
+  anova(by="term") %>% tidy() %>% kable(caption = "CAP of scent composition vs. inflo age (closed/total flowers)")
 ```
 
-# Restrict to `r params$year` samples only
-
 ```{r setyear}
-yr <- as.character(params$year) # dynamic from knitr params specified in header or graphically
-if(yr=="2018") dn <- "Day" else dn <- c("Day","Night")
-vol.glob <- vol.glob[svglob$Year == yr & svglob$DN %in% dn,]
-fvol.glob <- fvol.glob[svglob$Year == yr & svglob$DN %in% dn,]
-svglob <- svglob[svglob$Year == yr & svglob$DN %in% dn,]
+# Restrict to `r params$year` samples only
+if(params$year==2018) dn <- "Day" else dn <- c("Day","Night")
+vol.glob <-   vol.glob[svglob$Year == as.character(params$year) & svglob$DN %in% dn,]
+fvol.glob <- fvol.glob[svglob$Year == as.character(params$year) & svglob$DN %in% dn,]
+svglob <-       svglob[svglob$Year == as.character(params$year) & svglob$DN %in% dn,]
 
 #populations in order of island
 svglob$Population <- factor(svglob$Population, levels=glob.pops.WtoE)
@@ -184,60 +192,14 @@ levels(svglob$PopulationL)[1:2] <- "964" #lump Kawelo 964 and Wood 13885 - Kaneh
 glob.popsL.pal <- glob.pops.pal[-c(1:2)]
 ```
 
-# Table of volatile emissions
+`r ifelse(params$year==2018,"","# Isomeric ratios")`
 
-```{r tableofvols}
-chemsf <- read_csv("./data/chemsf_190815_kaho_fixed.csv")
-load("./data/get_kovats.rda") # from alkane ladders
-#just look for alkanes in unfiltered sample data with often bad IDs! (better to use ladder)
-alkanes <- read_csv("./data/alkanes.csv") %>% left_join(chemsf %>% select(-starts_with(c("count","freq")))) %>% 
-  filter(!n %in% c(11,13,15,16,24)) %>% drop_na(RT) #don't fit curve
-
-fvol.glob.mean <- fvol.glob %>% mutate(Sex=svglob$Sex, DN=svglob$DN) %>% group_by(Sex, DN) %>% summarize_all(mean) %>% as.data.frame
-rownames(fvol.glob.mean) <- with(fvol.glob.mean, paste(Sex, DN))
-fvol.glob.mean <- fvol.glob.mean %>% select(-c("Sex","DN")) %>% t %>% as.data.frame %>% tibble::rownames_to_column("name") %>% 
-  left_join(chems.glob2, by=c(name="name4")) %>% mutate(type=factor(type)) %>% 
-  left_join(chemsf %>% select(name.y=name, RT)) %>%  # add retention times
-  mutate(RI = get_kovats(RT)) %>%  #get Kovats retention index from alkane ladders on this GC
-  left_join(read_csv("./data/schiedea_Name_CAS.csv") %>% rename(name.y=Name))
-
-if(params$year==2019) {
-fvol.glob.mean %>% select(c(13,14,1:7,16,18,23:25)) %>% arrange(type, subtype, desc(freq.glob), name) %>% 
-  filter(freq.glob > 0.10) %>% #Present in 10% of samples 
-  write_csv("./output_cut/AppendixS4.csv")
-
-fvol.glob.mean %>% rowwise %>% mutate(mean_ng = mean(`F Day`, `F Night`, `M Day`, `M Night`)) %>% 
-  ungroup %>% mutate(percentage = round(100*mean_ng/sum(mean_ng),2), RT=round(RT,2), RI=round(RI,0)) %>%
-  select(IUPAC, CAS, RT, RI, percentage) %>% filter(percentage>0.3) %>% arrange(desc(percentage)) %>%
-  write_csv("./output_cut/fvol_glob_mean_RT.csv") #For RMBL GC website
-}
+```{r isomers, eval=params$year==2019}
+EZ <- sort(fvol.glob$`(E)-3-methylbutyraldoxime`/fvol.glob$`(Z)-3-methylbutyraldoxime`)[-c(1,53:100)]
+print(paste("E/Z emission ratio for3-methylbutyraldoxime:",format(mean(EZ), digits=2)))
 ```
 
-# Inventory for `r params$year`
-
-```{r inventory_year}
-#Samples
-with(svglob, as.data.frame.matrix(table(Population, paste(Sex, DN))))
-
-#Plants
-svglob.unique <- svglob %>% 
-  dplyr::select(Species, Island, Population, Plant, Sex, Cutting) %>% distinct() %>% 
-        arrange(Species, Island, Population, Plant, Sex, Cutting)
-with(svglob.unique, as.data.frame.matrix(table(Population, Sex)))
-
-#Genotypes
-svglob.geno <- svglob %>% 
-  dplyr::select(Species, Island, Population, Plant, Sex) %>% distinct() %>% 
-        arrange(Species, Island, Population, Plant, Sex)
-with(svglob.geno, as.data.frame.matrix(table(Population, Sex)))
-
-#Families
-svglob.family <- svglob %>% 
-  dplyr::select(Species, Island, Population, Family, Sex) %>% distinct() %>% 
-        arrange(Species, Island, Population, Family, Sex)
-```
-
-# Total emissions
+# `r ifelse(params$year==2018, "Appendix S3","Table 1")`: Model of total emissions
 
 ```{r total_stats}
 svglob$Genotype <- with(svglob, factor(paste(Population, Plant, Sex)))
@@ -245,18 +207,11 @@ svglob$Genotype <- with(svglob, factor(paste(Population, Plant, Sex)))
 if(params$year == 2019) {
 svglob$SexDN <- with(svglob, factor(paste0(Sex, DN)))
 SexDN.x <- data.frame(SexDN=levels(svglob$SexDN), x=c(1,2,5,6,3,4))
-ftot.mod <- lmer(fvoltot ~ SexDN + (1|Genotype/Pair), data = svglob) 
+ftot.mod <-     lmer(fvoltot ~ SexDN +             (1|Genotype/Pair), data = svglob) 
+ftot.mod.noH <- lmer(fvoltot ~ DN*Sex+Population + (1|Genotype/Pair), data = svglob[svglob$Sex!="H",])# use this one since herm sample size is low.
+ftot.mod.noH.anova <- anova(ftot.mod.noH, type=3)
 
-(ftot.mod.sep <- lmer(fvoltot ~ DN*Sex+Population + (1|Genotype/Pair), data = svglob))
-anova(ftot.mod.sep, type=3) %>% kable() %>% print()
-
-(ftot.mod.sep.noH <- lmer(fvoltot ~ DN*Sex+Population + (1|Genotype/Pair), data = svglob[svglob$Sex!="H",]))# use this one since herm sample size is low.
-anova(ftot.mod.sep.noH, type=3) %>% kable() %>% print()
-
-cld.mod.sep <-  ftot.mod.sep %>% ref_grid %>% emmeans(~ Sex*DN) %>% summary 
 cld.mod <- ftot.mod %>% ref_grid %>% emmeans(~ SexDN) %>% summary 
-kable(cld.mod, digits=0, caption = "Estimated marginal means")
-svglob %>% group_by(Sex, DN) %>% summarize(across(fvoltot, list(mean=mean, sd=sd, n=length))) %>% kable
 
 cont <- ftot.mod %>%
 multcomp::glht(linfct = multcomp::mcp(SexDN=c("FDay  - FNight == 0",
@@ -273,19 +228,20 @@ multcomp::glht(linfct = multcomp::mcp(SexDN=c("FDay  - FNight == 0",
          increase=(-estimate/cld.mod[match(lvl1, cld.mod$SexDN),"emmean"]),
          x1 = SexDN.x[match(lvl1, SexDN.x$SexDN),"x"], 
          x2 = SexDN.x[match(lvl2, SexDN.x$SexDN),"x"])
-cont[,-c(4,9,11,13,14)] %>% kable(digits=2) 
+#cont[,-c(4,9,11,13,14)] %>% kable(digits=2, caption="Contrasts between total emissions for each sex and time") 
 } else if(params$year == 2018) {
-  (ftot.mod.noH <- lm(fvoltot ~ Sex+Population, data = svglob[svglob$Sex!="H",]))
-  anova(ftot.mod.noH) %>% kable() %>% print()
-  
-  ftot.mod <- lm(fvoltot ~ Sex, data = svglob) 
+  ftot.mod <-     lm(fvoltot ~ Sex,            data = svglob) 
+  ftot.mod.noH <- lm(fvoltot ~ Sex+Population, data = svglob[svglob$Sex!="H",])
+  ftot.mod.noH.anova <- anova(ftot.mod.noH)
   cld.mod <- ftot.mod %>% ref_grid %>% emmeans(~ Sex) %>% summary 
-  kable(cld.mod, digits=0, caption = "Estimated marginal means")
-  svglob %>% group_by(Sex) %>% summarize(across(fvoltot, list(mean=mean, sd=sd, n=length))) %>% kable
 }
+ftot.mod.noH.anova %>% kable(caption="A. Model of total emissions (excluding hermaphrodites)")
+cld.mod %>% kable(digits=0, caption = "B. Estimated marginal means for total emissions")
 ```
 
-```{r total, fig.height=7, fig.width=6}
+# `r ifelse(params$year==2018, "Appendix S3","Figure 2")`: Total emissions
+
+```{r total, fig.width=ftot.plot.dims[1], fig.height=ftot.plot.dims[2]}
 if(params$year == 2019) {
   (ftot.plot <- ggplot(svglob, aes(x=factor(paste(Sex, DN), levels=c("F Day","F Night","M Day","M Night","H Day","H Night")), 
                                    y = fvoltot, color=factor(Sex, levels=c("F","M","H")), 
@@ -305,7 +261,7 @@ if(params$year == 2019) {
   ggsave("./output_cut/Fig2.pdf", ftot.plot, device=cairo_pdf, height=7, width=6)
   
 } else if(params$year == 2018) {
-  (ftot.plot <- ggplot(svglob, aes(x=factor(paste(Sex, DN), levels=c("F Day","M Day","H Day")), 
+  ftot.plot <- ggplot(svglob, aes(x=factor(paste(Sex, DN), levels=c("F Day","M Day","H Day")), 
                                    y = fvoltot, color=factor(Sex, levels=c("F","M","H")), 
                                    shape=factor(paste(Sex,DN), levels=c("F Day","M Day","H Day")))) + 
      geom_boxplot(color=c(brewer.pal(3,"Set1")[1:2],NA), outlier.shape=NA, fill=NA)+
@@ -315,15 +271,14 @@ if(params$year == 2019) {
      scale_color_brewer(palette="Set1")+
      scale_x_discrete("",labels=c("Female\nDay","Male\nDay","Herm.\nDay"))+
      guides(shape=F, color=F)+
-     theme_minimal()+theme(panel.grid.major.x = element_blank(), axis.text=element_text(color="black")))
+     theme_minimal()+theme(panel.grid.major.x = element_blank(), axis.text=element_text(color="black"))
   
   ggsave("./output_cut/AppendixS3_total.pdf", ftot.plot, device=cairo_pdf, height=5, width=3)
 }
+print(ftot.plot)
 ```
 
-# Full CAP model
-
-## Relative emission rates
+# `r ifelse(params$year==2018, "Appendix S3","Table 2")`: Scent composition model
 
 ```{r cap_prop_stats}
 if(params$year == 2019) {
@@ -336,21 +291,20 @@ if(params$year == 2019) {
 
 cap.glob.pop.prop
 set.seed(1)
-(anova.cap.glob.pop.prop <- anova(cap.glob.pop.prop, by="term")) #order of the terms matters for p-values!!
+anova.cap.glob.pop.prop <- anova(cap.glob.pop.prop, by="term")
 
 anova.cap.df <- anova.cap.glob.pop.prop %>% as.data.frame %>% rownames_to_column("term") %>% 
   filter(term!="Total") %>% mutate(R2 = SumOfSqs / sum(SumOfSqs), term=term %>% 
                                      str_replace_all(c("StartSunset"="Time", ":"=" \u00D7 ")) %>% fct_reorder(R2))
-anova.cap.df %>% kable()
+anova.cap.df %>% kable(caption = "Permutation test of CAP model of relative emissions")
 ```
 
-# Diel CAP
+# `r ifelse(params$year==2018, "Appendix S3","Figure 3AB")`: Day/night differences
 
-```{r cap_DN_Sex}
+```{r cap_DN_Sex, fig.width=8, fig.height=12.5, results="hide"}
 if(params$year == 2019) {
   (cap.glob <- capscale(decostand(fvol.glob, "hellinger") ~ Time+Sex, data=svglob, distance="bray", metaMDSdist = F))
   
-  cairo_pdf("./output_cut/Fig3AB.pdf", width=8, height=8+4.5)
   layout(matrix(c(1,2), 2, 1), heights=c(8,4.5))
   par(mar=c(5,4,0,0))
   plot(cap.glob, type="n")
@@ -374,22 +328,21 @@ if(params$year == 2019) {
   set.seed(17) #get seed by force below
   ordipointlabel(cap.glob, display="species", select=colSums(fvol.glob)>chem_sum_cutoff,
                  col=chemtype.pal[fvol.glob.mean$type][colSums(fvol.glob)>chem_sum_cutoff], font=2, xpd=T, pch=19, add=T, cex=0.8)
+  dev.copy(cairo_pdf, filename="./output_cut/Fig3AB.pdf", width=8, height=8+4.5)
   dev.off()
   
 } else if(params$year == 2018) {
   (cap.glob <- capscale(decostand(fvol.glob, "hellinger") ~ Sex, data=svglob, distance="bray", metaMDSdist = F))
   
-  cairo_pdf("./output_cut/AppendixS3_CAP_A.pdf", width=8, height=8)
+  layout(matrix(c(1,2), 2, 1), heights=c(8,4.5))
   par(mar=c(4,4,1,1))
   plot(cap.glob, type="n")
   mtext("A",side=2, line=2.5,padj=-13, cex=2, las=2)
   points(cap.glob, display="sites", col=brewer.pal(3, "Set1")[c(1,3,2)][svglob$Sex], pch=c(1,5,0)[as.integer(svglob$Sex)], cex=1.5, lwd=4)
   text(cap.glob, display="cn", labels=c("Female", "Herm.", "Male"), font=2, col=brewer.pal(3, "Set1")[c(1,3,2)])
   legend("topleft", "Day", bty="n", cex=1.2, inset=c(-0.04, 0))
-  dev.off()
   
   chem_sum_cutoff <- 40
-  cairo_pdf("./output_cut/AppendixS3_CAP_B.pdf", width=8, height=4.5)
   plot(cap.glob, type="n", xlim=c(-0.4,0.4), ylim=c(-0.4,0.4))
   mtext("B",side=2, line=2.5,padj=-6, cex=2, las=2)
   legend("bottomleft" ,names(chemtype.pal), col=chemtype.pal, pt.cex=2, pch=19, bty="n")
@@ -398,13 +351,14 @@ if(params$year == 2019) {
   ordipointlabel(cap.glob, display="species", select=colSums(fvol.glob)>chem_sum_cutoff,
                  col=chemtype.pal[fvol.glob.mean$type][colSums(fvol.glob)>chem_sum_cutoff], font=2, xpd=T, pch=19, add=T, cex=0.8)
     text(cap.glob, display="cn", labels=c("Female", "Herm.", "Male"), font=2)
+  dev.copy(cairo_pdf, filename="./output_cut/AppendixS3_CAP_AB.pdf", width=8, height=8+4.5)
   dev.off()
 }
 ```
 
-# Population CAP
+# `r ifelse(params$year==2018, "Appendix S3","Figure 3CD")`: Population differences
 
-```{r cap_Sex_Pop}
+```{r cap_Sex_Pop, fig.width=8, fig.height=ifelse(params$year==2018,8,16), results="hide"}
 svglob.D <- svglob[svglob$DN=="Day",]
 svglob.D$Population <- droplevels(svglob.D$Population)#not all pops in 2018 dataset
 svglob.D$IslandPop <- droplevels(svglob.D$IslandPop)
@@ -414,7 +368,6 @@ cap.glob.D <- capscale(decostand(fvol.glob[svglob$DN=="Day",], "hellinger") ~ Po
 if(params$year==2019) {
 chem_sum_cutoff <- 60
 
-cairo_pdf("./output_cut/Fig3CD.pdf", width=8, height=16)
 par(mar=c(5,4,0,0))
 layout(matrix(c(1,2), 2, 1), heights=c(8,8))
 plot(cap.glob.D, type="n", xlim=c(-1,1))
@@ -443,11 +396,12 @@ set.seed(2)
 ordipointlabel(cap.glob.N, display="species", select=colSums(fvol.glob)>chem_sum_cutoff, col=alpha("black",0.5), font=2, pch=19, add=T, cex=0.75)
 legend("bottomright", c("Female","Herm.","Male"), cex =1.2, pch = c(1,16,5,18,0,15)[c(2,4,6)], pt.cex=c(1.5,1.5,1.5,2,1.5,1.5,1.5)[c(2,4,6)], inset=c(-0,0), xpd=T, bty="n", pt.lwd=4)
 legend("topleft", "Night", bty="n", cex=1.2, inset=c(-0.04, 0))
+dev.copy(cairo_pdf, filename="./output_cut/Fig3CD.pdf", width=8, height=16)
 dev.off()
 
 } else if(params$year==2018) {
 chem_sum_cutoff <- 60
-cairo_pdf("./output_cut/AppendixS3_CAP_C.pdf", width=8, height=8)
+
 par(mar=c(4,4,0,0))
 plot(cap.glob.D, type="n")
 mtext("C",side=2, line=2.5,padj=-13, cex=2, las=2)
@@ -463,45 +417,18 @@ legend("bottomleft", levels(svglob.D$IslandPopL)[table(svglob.D$IslandPopL)>0],
        cex =1.2, inset=c(-0.03,0), xpd=T, bty="n")
 legend("bottomright", c("Female","Herm.","Male"), cex =1.2, pch = c(1,5,0), pt.cex=1.5, inset=c(-0,0), xpd=T, bty="n", pt.lwd=4)
 legend("topleft", "Day", bty="n", cex=1.2, inset=c(-0.04, 0))
+dev.copy(cairo_pdf, filename="./output_cut/AppendixS3_CAP_C.pdf", width=8, height=8)
 dev.off()
 }
 ```
 
-# Heatmap
-
-```{r heatmap, fig.show="hide", eval=params$year==2019}
-mincount <- 15
-srt <- order(svglob$DN, svglob$Sex, svglob$Year, svglob$Population,  decreasing=F)
-filter.cols <- colSums(decostand(vol.glob, "pa"))>mincount
-fvol.glob.filter <- fvol.glob[,filter.cols]
-
-ph <- pheatmap(as.matrix(t(fvol.glob.filter[srt,]))^(1/3),
-         cluster_cols=F, show_colnames=F,
-         clustering_method="mcquitty", clustering_distance_rows="correlation",
-         clustering_callback = function(hc, ...){dendsort(hc, type="average")},
-         scale="none", color=inferno(512),
-         annotation_row = data.frame(Class=factor(fvol.glob.mean$type[filter.cols]), row.names=colnames(fvol.glob.filter)),
-         annotation_col = data.frame(Population=svglob$Population, Sex=recode(svglob$Sex, F="Female", H="Herm.", M="Male"), Time=svglob$DN, row.names=rownames(fvol.glob.filter)), 
-         annotation_colors = list(Class=chemtype.pal,
-                                  Time=setNames(c("grey80","grey20"),levels(svglob$DN)),
-                                  Sex=setNames(brewer.pal(3,"Set1")[c(1,3,2)],
-                                               levels(recode(svglob$Sex, F="Female", H="Herm.", M="Male"))),
-                                  Population=glob.pops.pal), 
-         gaps_col = which(as.logical(diff(as.integer(factor(paste(svglob$Sex,svglob$DN)))[srt]))),
-         cellwidth = 3.5, cellheight = 10, fontsize = 10, border_color = NA, annotation_legend=T, cutree_rows=10,
-         legend=T, legend_breaks=seq(0, max(fvol.glob.filter), by= 20)^(1/3), 
-         legend_labels=c("0 ng/h/flower",seq(20, max(fvol.glob.filter), by= 20)))
-
-cairo_pdf("./output_cut/AppendixS5.pdf", width=10.6, height=7); ph; dev.off()
-```
-
-# Geography
+`r ifelse(params$year==2018, "","# Table 3: Scent vs. genetic and geographic distance")`
 
 ```{r geog, eval=params$year==2019}
 #S globosa scent distance matrix vs. GEOGRAPHIC distance mantel test
 
 #get pops from kml
-pops <- st_read("./data/Schiedea populations.kml") 
+pops <- st_read("./data/Schiedea populations.kml", quiet=T) 
 #"http://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1nrFQN_CJTffw2Smd3-dD9C-sbqU&lid=2WoGNCc9HTw") #From Google My Map
 pops <- cbind(st_coordinates(pops), pops)
 rownames(pops) <- pops$Pop_Number
@@ -529,8 +456,6 @@ geog.glob.m <- geog.m[levels(svglob$Population),levels(svglob$Population)]
 mean12.scent <- meandist(scentdist.glob, svglob$Population)
 mantel.avggeog <- mantel(mean12.scent, geog.glob.m)
 ```
-
-# Genetics
 
 ```{r genetics, eval=params$year==2019}
 #geographic matricies for genetics
@@ -561,14 +486,6 @@ mean.avggen.labels <- mean.avggen.labels %>% mutate(dupe = duplicated(t(apply(me
 
 mantel.gen <- lapply(mean.gen, mantel, mean.scent)
 mantel.avggen <- mantel(mean.avggen, mean.scent)
-```
-
-# Partial Mantels
-
-```{r partialmantel, eval=params$year==2019}
-mantel(        mean.scent, mean.avggen)
-mantel.partial(mean.scent, mean.avggen, mean.geog.m) #Scent vs. genetics, controlling for geography
-mantel.partial(mean.scent, mean.geog.m, mean.avggen) #Scent vs. geography, controlling for genetics
 ```
 
 
@@ -646,42 +563,62 @@ mantel.geog.avggen.OMN <- mantel(mean.avggen[pops.include,pops.include], mean.ge
 #NAs in these distances are from 964 or 15191 (1 sample of genetic or scent data each)
 ```
 
-# Scent vs. geographic distance
-
 ```{r scent_geog, eval=params$year==2019}
-scent.geog.plot <- ggplot(scent.geog12.glob.split %>% filter(Sex!="H", geog!=0), aes(geog/1000, scent, color=Sex, shape=factor(paste(Sex,DN)), linetype=DN)) + 
-   geom_vline(aes(xintercept=55), color="black")+
-   geom_vline(aes(xintercept=0), color="black")+
-   annotate("text", label="Within\npopulation", x=-40, y=0.05) +
-   annotate("text", label="Within\nisland", x=25, y=0.05) +
-   annotate("text", label="Between\nislands", x=87, y=0.05) +
-    geom_point(alpha=1) + 
-   #geom_boxplot(data=scent.geog.glob.split %>% filter(Sex!="H", geog==0), linetype=1, outlier.shape = NA, aes(x=-75+15*as.integer(factor(paste(Sex,DN)))), show.legend = FALSE)+
-   stat_summary(data=scent.geog.glob.split %>% filter(Sex!="H", geog==0),
-                aes(x=-75+15*as.integer(factor(paste(Sex,DN)))),
-                fun=mean, geom="point", shape="-", size=15) +
-   geom_point(data=scent.geog.glob.split %>% filter(Sex!="H", geog==0), alpha=1, 
-              aes(x=-75+15*as.integer(factor(paste(Sex,DN)))))+
-    geom_smooth(method="loess", se=F, span=0.6) +
-    scale_x_continuous("Geographic distance (km)", limits=c(-75,300), expand=expansion(mult=c(0,0)), breaks=seq(0,300, by=50)) +
-    scale_y_continuous("Scent composition distance", limits=c(0,NA), expand=expansion(mult=c(0,0.05))) +
-    scale_linetype_manual("Time", values=c(2,1), labels=c("Day", "Night"))+
-    scale_shape_manual("Sex and Time", values=c(1,16,0,15), labels=c("Female - Day","Female - Night","Male - Day","Male - Night"))+
-    scale_color_brewer("Sex", palette="Set1", labels=c("Female","Male"))+
-    theme_classic() + theme( axis.text=element_text(color="black"))+
-   guides(linetype=guide_legend(keywidth=2, override.aes = list(color="black", size=1)))
-#ggsave("./output_cut/Fig5.pdf", scent.geog.plot, device=cairo_pdf, height=6, width=7) #need to combine legend
-
 mantels.geog <- mantel.geog12.split %>% unlist(recursive=F) %>%
   sapply(`[`, c("signif", "statistic")) %>% t %>% as.data.frame  %>% 
   tibble::rownames_to_column("id") %>% separate(id, c("DN","Sex"), sep="\\.") %>% mutate_all(unlist)
 lm.geog <- lm.geog12.split %>% unlist(recursive=F) %>%
   lapply(function(x) x$coefficients) %>% as.data.frame %>% t %>% as.data.frame %>% 
   tibble::rownames_to_column("id") %>% separate(id, c("DN","Sex"), sep="\\.") %>% setNames(c("DN","Sex","intercept", "slope")) %>% mutate(slope=slope*1000*100) #convert slopes to bray per 100 km (originally in m)
-knitr::kable(left_join(mantels.geog, lm.geog) %>% filter(Sex !="H"), digits=3)
+left_join(mantels.geog, lm.geog) %>% filter(Sex !="H") %>% 
+  kable(caption = "Mantel test of scent vs. geographic distance", digits=3)
 ```
 
-```{r scent_geog_panels, fig.show="hide", eval=params$year==2019}
+```{r scent_avggen, eval=params$year==2019}
+mantels.avggen <- mantel.avggen.split %>% unlist(recursive=F) %>%
+  sapply(`[`, c("signif", "statistic")) %>% t %>% as.data.frame  %>% 
+  tibble::rownames_to_column("id") %>% separate(id, c("DN","Sex"), sep="\\.") %>% mutate_all(unlist)
+lm.avggen <- lm.avggen.split %>% unlist(recursive=F) %>%
+  lapply(function(x) x$coefficients) %>% as.data.frame %>% t %>% as.data.frame %>% 
+  tibble::rownames_to_column("id") %>% separate(id, c("DN","Sex"), sep="\\.") %>% setNames(c("DN","Sex","intercept", "slope")) 
+left_join(mantels.avggen,lm.avggen) %>% filter(Sex !="H") %>% 
+  kable(caption = "Mantel test of scent vs. genetic distance", digits=3)
+```
+
+```{r partialmantel_avggen, eval=params$year==2019}
+mantels.partial.avggen <- mantel.partial.avggen.split %>% unlist(recursive=F) %>%
+  sapply(`[`, c("signif", "statistic")) %>% t %>% as.data.frame  %>% 
+  tibble::rownames_to_column("id") %>% separate(id, c("DN","Sex"), sep="\\.") %>% mutate_all(unlist)
+mantels.partial.avggen %>% filter(Sex !="H") %>% 
+  kable(caption = "Partial Mantel test of scent vs. genetic distance, controlling for geographic distance", digits=3)
+
+mantels.partial.geog <- mantel.partial.geog.split %>% unlist(recursive=F) %>%
+  sapply(`[`, c("signif", "statistic")) %>% t %>% as.data.frame  %>% 
+  tibble::rownames_to_column("id") %>% separate(id, c("DN","Sex"), sep="\\.") %>% mutate_all(unlist)
+mantels.partial.geog %>% filter(Sex !="H") %>% 
+    kable(caption = "Partial Mantel test of scent vs. geographic distance, controlling for genetic distance", digits=3)
+```
+
+`r ifelse(params$year==2018, "","# Figure 4: Scent vs. genetic distance")`
+
+```{r scent_avggen_panels, eval=params$year==2019}
+(scent.avggen.plot <- ggplot(scent.avggen.glob.split %>% dplyr::filter(Sex!="H"), aes(avggen, scent, color=Sex, shape=factor(paste(Sex,DN)), linetype=DN)) +
+    geom_point() + 
+    #geom_smooth(method="loess", se=F, span=3) +
+   geom_smooth(method="lm", se=F)+
+    scale_x_continuous("Genetic distance", limits=c(0,NA), expand=expansion(mult=c(0,0.05))) +
+    scale_y_continuous("Scent composition distance", limits=c(0,NA), expand=expansion(mult=c(0,0.05))) +
+    scale_linetype_manual("Time", values=c(2,1), labels=c("Day", "Night"))+
+    scale_shape_manual("Sex and Time", values=c(1,16,0,15), labels=c("Female - Day","Female - Night","Male - Day","Male - Night"))+
+    scale_color_brewer("Sex", palette="Set1", labels=c("Female","Male"))+
+    theme_classic() + theme(axis.text=element_text(color="black"))+
+   guides(linetype=guide_legend(keywidth=2, override.aes = list(color="black", size=1))))
+ggsave("./output_cut/Fig4split.pdf", scent.avggen.plot, device=cairo_pdf, height=6, width=7)
+```
+
+`r ifelse(params$year==2018, "","# Figure 5: Scent vs. geographic distance")`
+
+```{r scent_geog_panels, eval=params$year==2019}
 scent.geog.between.plot <- ggplot(scent.geog12.glob.split %>% filter(Sex!="H", geog!=0), aes(geog/1000, scent, color=Sex, shape=factor(paste(Sex,DN)), linetype=DN)) + 
    geom_vline(aes(xintercept=55), color="black", linetype=3)+
    annotate("text", label="Within\nisland", x=25, y=0.05) +
@@ -710,96 +647,48 @@ scent.geog.split.plot <- grid.arrange(scent.within.plot, scent.geog.between.plot
 ggsave("./output_cut/Fig5split.pdf", scent.geog.split.plot, device=cairo_pdf, height=6, width=7)
 ```
 
-# Scent vs. genetic distance
+`r ifelse(params$year==2018,"","# Appendix S4: Volatile emission rates")`
 
-```{r scent_gen, eval=F}
-#don't use this anymore, better to look at genetic distance averaged across three genes
-(scent.gen.plot <- ggplot(scent.glob.gen.split.long %>% dplyr::filter(Sex!="H"), aes(gendist, scent, color=Sex, shape=DN, linetype=DN)) +
-    facet_wrap(vars(gene), scales = "free_x", labeller=labeller(gene=setNames(genes,levels(scent.glob.gen.split.long$gene))))+
-    geom_point() + 
-    geom_smooth(method="loess", se=F, span=3) +
-    xlab("Genetic distance") +
-    ylab("Scent composition distance (Bray-Curtis)")+
-    scale_linetype_manual("Time", values=c(2,1), labels=c("Day", "Night"))+
-    scale_shape_manual("Time", values=c(2,1), labels=c("Day", "Night"))+
-    scale_color_brewer("Sex", palette="Set1", labels=c("Female","Male"))+
-    theme_classic() + theme(panel.spacing.x = unit(4, "mm"), 
-                            strip.text=element_text(face="italic"),
-                            axis.text=element_text(color="black"))+
-   guides(linetype=guide_legend(keywidth=2, override.aes = list(color="black", size=1))))
-ggsave("scent_gen.pdf", scent.gen.plot, device=cairo_pdf, height=5, width=9)
-ggsave("scent_gen.png", scent.gen.plot, type="cairo-png", height=5, width=9)
-
-#extract stats from Mantel tests
-mantels.gen <- mantel.gen.split %>% unlist(recursive=F) %>% unlist(recursive=F) %>%
-  sapply(`[`, c("signif", "statistic")) %>% t %>% as.data.frame  %>% 
-  tibble::rownames_to_column("id") %>% separate(id, c("gene","DN","Sex"), sep="\\.") %>% mutate_all(unlist)
-knitr::kable(mantels.gen %>% filter(Sex !="H"), digits=3)
-
+```{r tableofvols}
+if(params$year==2019) {
+fvol.glob.mean %>% select(c(13,14,1:7,16,18,23:25)) %>% arrange(type, subtype, desc(freq.glob), name) %>% 
+  filter(freq.glob > 0.10) %>% #Present in 10% of samples 
+    select(-c(standard,RT, CAS), prop=freq.glob, `ret. index`=RI) %>% 
+    kable(caption="Emissions of each volatile (ng/h/flower)", digits=2)
+}
 ```
 
-```{r scent_avggen, eval=params$year==2019}
-scent.avggen.plot <- ggplot(scent.avggen.glob.split %>% dplyr::filter(Sex!="H"), aes(avggen, scent, color=Sex, shape=factor(paste(Sex,DN)), linetype=DN)) +
-    geom_point() + 
-    #geom_smooth(method="loess", se=F, span=3) +
-   geom_smooth(method="lm", se=F)+
-    scale_x_continuous("Genetic distance", limits=c(0,NA), expand=expansion(mult=c(0,0.05))) +
-    scale_y_continuous("Scent composition distance", limits=c(0,NA), expand=expansion(mult=c(0,0.05))) +
-    scale_linetype_manual("Time", values=c(2,1), labels=c("Day", "Night"))+
-    scale_shape_manual("Sex and Time", values=c(1,16,0,15), labels=c("Female - Day","Female - Night","Male - Day","Male - Night"))+
-    scale_color_brewer("Sex", palette="Set1", labels=c("Female","Male"))+
-    theme_classic() + theme(axis.text=element_text(color="black"))+
-   guides(linetype=guide_legend(keywidth=2, override.aes = list(color="black", size=1)))
-ggsave("./output_cut/Fig4split.pdf", scent.avggen.plot, device=cairo_pdf, height=6, width=7)
+`r ifelse(params$year==2018, "","# Appendix S5: Heatmap")`
 
-mantels.avggen <- mantel.avggen.split %>% unlist(recursive=F) %>%
-  sapply(`[`, c("signif", "statistic")) %>% t %>% as.data.frame  %>% 
-  tibble::rownames_to_column("id") %>% separate(id, c("DN","Sex"), sep="\\.") %>% mutate_all(unlist)
-lm.avggen <- lm.avggen.split %>% unlist(recursive=F) %>%
-  lapply(function(x) x$coefficients) %>% as.data.frame %>% t %>% as.data.frame %>% 
-  tibble::rownames_to_column("id") %>% separate(id, c("DN","Sex"), sep="\\.") %>% setNames(c("DN","Sex","intercept", "slope")) 
-knitr::kable(left_join(mantels.avggen,lm.avggen) %>% filter(Sex !="H"), digits=3)
+```{r heatmap, eval=params$year==2019, fig.width=11, fig.height=7, results="hide"}
+mincount <- 15
+srt <- order(svglob$DN, svglob$Sex, svglob$Year, svglob$Population,  decreasing=F)
+filter.cols <- colSums(decostand(vol.glob, "pa"))>mincount
+fvol.glob.filter <- fvol.glob[,filter.cols]
+
+ph <- pheatmap(as.matrix(t(fvol.glob.filter[srt,]))^(1/3),
+         cluster_cols=F, show_colnames=F,
+         clustering_method="mcquitty", clustering_distance_rows="correlation",
+         clustering_callback = function(hc, ...){dendsort(hc, type="average")},
+         scale="none", color=inferno(512),
+         annotation_row = data.frame(Class=factor(fvol.glob.mean$type[filter.cols]), row.names=colnames(fvol.glob.filter)),
+         annotation_col = data.frame(Population=svglob$Population, Sex=recode(svglob$Sex, F="Female", H="Herm.", M="Male"), Time=svglob$DN, row.names=rownames(fvol.glob.filter)), 
+         annotation_colors = list(Class=chemtype.pal,
+                                  Time=setNames(c("grey80","grey20"),levels(svglob$DN)),
+                                  Sex=setNames(brewer.pal(3,"Set1")[c(1,3,2)],
+                                               levels(recode(svglob$Sex, F="Female", H="Herm.", M="Male"))),
+                                  Population=glob.pops.pal), 
+         gaps_col = which(as.logical(diff(as.integer(factor(paste(svglob$Sex,svglob$DN)))[srt]))),
+         cellwidth = 3.5, cellheight = 10, fontsize = 10, border_color = NA, annotation_legend=T, cutree_rows=10,
+         legend=T, legend_breaks=seq(0, max(fvol.glob.filter), by= 20)^(1/3), 
+         legend_labels=c("0 ng/h/flower",seq(20, max(fvol.glob.filter), by= 20)))
+
+cairo_pdf("./output_cut/AppendixS5.pdf", width=10.6, height=7); ph; dev.off()
 ```
 
-## Partial Mantels
+`r ifelse(params$year==2018, "","# Appendix S6: Genetic vs. geographic distance")`
 
-```{r partialmantel_avggen, eval=params$year==2019}
-mantels.partial.avggen <- mantel.partial.avggen.split %>% unlist(recursive=F) %>%
-  sapply(`[`, c("signif", "statistic")) %>% t %>% as.data.frame  %>% 
-  tibble::rownames_to_column("id") %>% separate(id, c("DN","Sex"), sep="\\.") %>% mutate_all(unlist)
-knitr::kable(mantels.partial.avggen %>% filter(Sex !="H"), digits=3)
-
-mantels.partial.geog <- mantel.partial.geog.split %>% unlist(recursive=F) %>%
-  sapply(`[`, c("signif", "statistic")) %>% t %>% as.data.frame  %>% 
-  tibble::rownames_to_column("id") %>% separate(id, c("DN","Sex"), sep="\\.") %>% mutate_all(unlist)
-knitr::kable(mantels.partial.geog %>% filter(Sex !="H"), digits=3)
-```
-
-# Genetic vs. geographic distance
-
-```{r geog_avggen, eval=params$year==2019}
-geog.gen.plot <- ggplot(geog.avggen.glob, aes(ifelse(geog==0, 0, geog/1000), avggen, color=Group, shape=intrapop, linetype=intrapop)) +
-    #facet_wrap(vars(gene), scales = "free_x")+
-   #facet_wrap(vars(intrapop), scale="free_x")+
-    geom_vline(aes(xintercept=55), color="black")+
-    annotate("text", label="Within\npopulation", x=-30, y=0.02) +
-   annotate("text", label="Within\nisland", x=25, y=0.02) +
-   annotate("text", label="Between\nislands", x=87, y=0.02) +
-    geom_point() + 
-   geom_text_repel(aes(label=ifelse(dupe | !intrapop, "", as.character(Var1))), size=3, direction="y", hjust=1, position=position_nudge(x=-8), box.padding=0, point.padding=0, label.padding=0, show.legend = F)+
-    geom_smooth(method="loess", se=F, span=1.5) +
-   scale_color_manual("Population group", values=unname(c(glob.pops.pal[12],"black",glob.pops.pal[2])))+
-   scale_shape_manual(values=c(19,1))+
-    scale_x_continuous("Geographic distance (km)", limits=c(-60,300), expand=expansion(mult=c(0,0)), breaks=seq(0,300, by=50), minor_breaks = seq(0,300, by=25)) +
-    scale_y_continuous("Genetic distance", limits=c(0,NA), expand=expansion(mult=c(0,0.05)))+
-   guides(shape=F, linetype=F)+
-    theme_bw()+theme(legend.position = "top", plot.margin=theme_bw()$plot.margin*1.5)
-
-mantel.geog.avggen
-mantel.geog.avggen.OMN
-```
-
-```{r geog_avggen_panels, fig.show="hide", eval=params$year==2019}
+```{r geog_avggen_panels, eval=params$year==2019}
 geog.gen.between.plot <- ggplot(geog.avggen.glob %>% filter(geog!=0), aes(geog/1000, avggen, color=Group)) +
     geom_vline(aes(xintercept=55), color="black", linetype=3)+
    annotate("text", label="Within\nisland", x=25, y=0.02) +
@@ -826,9 +715,9 @@ geog.gen.split.plot <- grid.arrange(geog.gen.within.plot, geog.gen.between.plot,
 ggsave("./output_cut/AppendixS6.pdf", geog.gen.split.plot, device=cairo_pdf, height=6, width=7)
 ```
 
-# Isomeric ratios
-
-```{r isomers, eval=params$year==2019}
-EZ <- sort(fvol.glob$`(E)-3-methylbutyraldoxime`/fvol.glob$`(Z)-3-methylbutyraldoxime`)[-c(1,53:100)]
-mean(EZ)
+```{r geog_avggen, eval=params$year==2019}
+print("Mantel test of genetic vs. geographic distance")
+mantel.geog.avggen
+print("Mantel test of genetic vs. geographic distance, excluding Hawai'i Island")
+mantel.geog.avggen.OMN
 ```
